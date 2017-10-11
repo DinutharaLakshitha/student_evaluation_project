@@ -1,4 +1,4 @@
-# student_evaluation_project
+# Student Evaluation Project
 This Project is developed as a semester project of University of Moratuwa
 
 # Grade one entry qualification evaluation system for government schools 
