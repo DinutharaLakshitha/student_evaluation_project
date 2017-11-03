@@ -21,6 +21,7 @@
 
 				<div id="error">
 					<?php
+                    require_once("classes/class.database.php");
 					if(isset($error))
 					{
 						?>
@@ -29,25 +30,53 @@
 						</div>
 						<?php
 					}
-					?>
+                    if (isset($_POST['btn-login']) && !empty($_POST['username'])
+                        && !empty($_POST['password'])) {
+
+                        $database = new Database();
+
+                        $query="select * from interviewer where user_id = ".$_POST['username'];
+                        $result=$database->getResults($query);
+                        if ($result){
+                            if ($row =mysqli_fetch_assoc($result)){
+                                if ($_POST['username'] == $row['user_id'] && $_POST['password'] == $row['password']) {
+                                    $_SESSION['valid'] = true;
+                                    $_SESSION['timeout'] = time();
+                                    $_SESSION['username'] = 'tutorialspoint';
+
+                                    echo 'You have entered valid use name and password';
+                                } else {
+                                    $msg = 'Wrong username or password';
+                                    echo 'wrong credentials';
+                                }
+                            }
+                        }
+                        else{
+                            echo "no results found";
+                        }
+
+
+                    }
+                    ?>
 				</div>
 
 				<div class="form-group">
-					<input type="text" class="form-control" name="txt_uname_email" placeholder="Username or Email" required />
+					<input type="text" class="form-control" name="username" placeholder="Username or Email" required />
 					<span id="check-e"></span>
 				</div>
 
 				<div class="form-group">
-					<input type="password" class="form-control" name="txt_password" placeholder="Your Password" />
+					<input type="password" class="form-control" name="password" placeholder="Your Password" />
 				</div>
 
 				<hr />
 
 				<div class="form-group">
-					<button type="submit" name="btn-login" class="btn btn-default">
+					<button type="submit" name="btn-login" class="btn btn-default" >
 						<i class="glyphicon glyphicon-log-in"></i> &nbsp; SIGN IN
 					</button>
 				</div>
+
 				<br />
 				<!--<label>Don't have account yet ! <a href="sign-up.php">Sign Up</a></label>-->
 			</form>

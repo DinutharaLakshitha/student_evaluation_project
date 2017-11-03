@@ -9,7 +9,7 @@ class Database
   private $username = "root";
   private $password = "";
   private $port="3306";
-  public $conn;
+  private $conn;
 
 
   public function __construct()
