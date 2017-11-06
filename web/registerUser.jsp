@@ -73,10 +73,9 @@ body {font-family: "Lato", sans-serif}
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
-
     
 <div class="login">
-    <div class="w3-container w3-blue-gray w3-section w3-round-large w3-padding-large">
+    <!--<div class="w3-container w3-blue-gray w3-section w3-round-large w3-padding-large">-->
     <h1>Register User</h1>
     <form method="post" action="Login">
         <%try{
@@ -90,11 +89,18 @@ body {font-family: "Lato", sans-serif}
         }%>
 
         <input style="margin-top:20px;" type="text" name="uname" placeholder="Enter Username" required="required" autofocus="true"/>
+        <select class="select" style="margin-top:20px;" required="required" name="occupation">
+            <option value="null">--Choose Occupation--</option>
+            <option value="admin">Admin</option>
+            <option value="dataEntry">Data Entry</option>
+            <option value="interviewer">Interviewer</option>
+
+         </select>
         <input style="margin-top:10px;" type="password" name="pass" placeholder="Enter Password" required="required" />
         <input style="margin-top:10px;" type="password" name="confirm_pass" placeholder="Confirm Password" required="required" />
         <button style="margin-top:10px;" type="submit" value="Login" class="btn btn-primary btn-block btn-large">Register User</button>
     </form>
-    </div>
+    <!--</div>-->
 </div>
   
   

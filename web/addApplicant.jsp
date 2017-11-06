@@ -18,7 +18,7 @@
 
 <!DOCTYPE html>
 <html>
-<title>Register User</title>
+<title>Add Applicant</title>
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -102,7 +102,7 @@ body {font-family: "Lato", sans-serif}
         <input type="text" name="txt_phone" placeholder="Phone Number" />
         <h4 style="color:blue;" >Date of Birth</h4>
               
-                <select name="date">
+                <select class="select" style="margin-top:20px;" name="date">
                   <option value="NO">Date</option>
                   <option value="0">0</option>
                   <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
@@ -116,7 +116,7 @@ body {font-family: "Lato", sans-serif}
 
 
                 </select>
-                <select name="month">
+                <select class="select" style="margin-top:20px;" name="month">
                   <option value="NO">Month</option>
                   <option value="1">jan</option>
                   <option value="2">feb</option>
