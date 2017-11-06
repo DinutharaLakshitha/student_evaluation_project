@@ -7,6 +7,9 @@
         }
         else{
             occupation=(String)session.getAttribute("occupation");
+            if (!occupation.equals("dataEntry")){
+                response.sendRedirect("index.jsp");
+            }
         }
     }catch(Exception e){
     }
@@ -89,20 +92,20 @@ body {font-family: "Lato", sans-serif}
         }%>
         
         <h4 style="color:blue;">ID</h4>
-        <input  type="text" name="txt_idno" placeholder="Application Number" />
+        <input style="margin-top:10px;" type="text" name="txt_idno" placeholder="Application Number" />
         <h4 style="color:blue;" >NAME</h4>
-        <input type="text"  name="txt_fname" placeholder="First Name" />
-        <input type="text"  name="txt_mname" placeholder="Middle Name Initial in Capital" />
-        <input type="text"  name="txt_lname" placeholder="Last Name" />
+        <input style="margin-top:10px;" type="text"  name="txt_fname" placeholder="First Name" />
+        <input style="margin-top:10px;" type="text"  name="txt_mname" placeholder="Middle Name Initial in Capital" />
+        <input style="margin-top:10px;" type="text"  name="txt_lname" placeholder="Last Name" />
         <h4 style="color:blue;" >ADDRESS</h4>
-        <input type="text"  name="txt_home_num" placeholder="Home Number"  />
-        <input type="text"  name="txt_street_name" placeholder="Street Name"  />
-        <input type="text"  name="txt_city_name" placeholder="City" />
+        <input style="margin-top:10px;" type="text"  name="txt_home_num" placeholder="Home Number"  />
+        <input style="margin-top:10px;" type="text"  name="txt_street_name" placeholder="Street Name"  />
+        <input style="margin-top:10px;" type="text"  name="txt_city_name" placeholder="City" />
         <h4 style="color:blue;" >Contact</h4>
         <input type="text" name="txt_phone" placeholder="Phone Number" />
         <h4 style="color:blue;" >Date of Birth</h4>
               
-                <select class="select" style="margin-top:20px;" name="date">
+                <select class="select" style="margin-top:10px;" name="date">
                   <option value="NO">Date</option>
                   <option value="0">0</option>
                   <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
@@ -116,7 +119,9 @@ body {font-family: "Lato", sans-serif}
 
 
                 </select>
-                <select class="select" style="margin-top:20px;" name="month">
+        
+        
+                <select class="select" style="margin-top:10px;" name="month">
                   <option value="NO">Month</option>
                   <option value="1">jan</option>
                   <option value="2">feb</option>
@@ -134,7 +139,7 @@ body {font-family: "Lato", sans-serif}
                 </select>
                 <br>
               <h4 style="color:blue;" >Distance</h4>
-                <input style="margin-top:20px;" type="text" name="txt_distance" placeholder="Distance from home" />
+                <input style="margin-top:10px;" style="margin-top:20px;" type="text" name="txt_distance" placeholder="Distance from home" />
               
             <button style="margin-top:20px;" type="submit" value="addstudent" class="btn btn-primary btn-block btn-large">Add Applicant</button>
     </form>

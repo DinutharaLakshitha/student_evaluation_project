@@ -5,8 +5,13 @@
  */
 package serv;
 
+import attr.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,25 +36,29 @@ public class Register extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession session=request.getSession(); 
-            if(session.getAttribute("uname")==null){
-                response.sendRedirect("index.jsp");    
-           }
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet Register</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet Register at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//                HttpSession session=request.getSession(); 
-//                session.setAttribute("error","errorOccured");
-//                response.sendRedirect("index.jsp");
+            String name = request.getParameter("uname");
+            String occupation = request.getParameter("occupation");
+            String tel = request.getParameter("tel");
+            String pass = request.getParameter("pass");
+            String confirm_pass = request.getParameter("confirm_pass");
+            
+            if (pass==confirm_pass){
+                User u =new User();
+           
+                boolean success= u.registerUser(name, occupation, tel, pass);
+            }
+            else{
+                HttpSession session=request.getSession(); 
+                session.setAttribute("new_uname",name);
+                session.setAttribute("new_occupation",occupation);
+                session.setAttribute("tel",tel);
+                session.setAttribute("error","Password not match");
+                response.sendRedirect("registerUser.jsp");
+            }
+            
         }
     }
 
@@ -65,7 +74,11 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -79,7 +92,11 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -7,6 +7,9 @@
         }
         else{
             occupation=(String)session.getAttribute("occupation");
+            if (!occupation.equals("admin")){
+                response.sendRedirect("index.jsp");
+            }
         }
     }catch(Exception e){
     }
@@ -77,28 +80,29 @@ body {font-family: "Lato", sans-serif}
 <div class="login">
     <!--<div class="w3-container w3-blue-gray w3-section w3-round-large w3-padding-large">-->
     <h1>Register User</h1>
-    <form method="post" action="Login">
+    <form method="post" action="Register">
         <%try{
-
-        String error =(String)session.getAttribute("error");
-        if (error.equals("errorOccured")){
-            session.removeAttribute("error");%>
-            <label>Invalid Username or Password</label>
+          
+        if (session.getAttribute("error")!=null){%>
+            <br>
+            <label style="padding-left:70px;padding-right: 70px;"><%String error =(String)session.getAttribute("error");
+            session.removeAttribute("error"); out.print(error);%> </label>
         <%}
         }catch(Exception e){
         }%>
 
         <input style="margin-top:20px;" type="text" name="uname" placeholder="Enter Username" required="required" autofocus="true"/>
-        <select class="select" style="margin-top:20px;" required="required" name="occupation">
+        <select class="select" style="margin-top:10px;" required="required" name="occupation">
             <option value="null">--Choose Occupation--</option>
             <option value="admin">Admin</option>
             <option value="dataEntry">Data Entry</option>
             <option value="interviewer">Interviewer</option>
 
          </select>
+        <input style="margin-top:10px;" type="number" name="tel" placeholder="Enter Contact No" required="required" />
         <input style="margin-top:10px;" type="password" name="pass" placeholder="Enter Password" required="required" />
         <input style="margin-top:10px;" type="password" name="confirm_pass" placeholder="Confirm Password" required="required" />
-        <button style="margin-top:10px;" type="submit" value="Login" class="btn btn-primary btn-block btn-large">Register User</button>
+        <button style="margin-top:20px;" type="submit" value="Register" class="btn btn-primary btn-block btn-large">Register User</button>
     </form>
     <!--</div>-->
 </div>

@@ -60,7 +60,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 label { 
 	width: 100%; 
 	margin-bottom: 10px; 
-	text-align: center;
+	text-align:center;
 	background: rgba(0,0,0,0.3);
 	border: none;
 	outline: none;
@@ -80,7 +80,6 @@ label {
 
 .select { 
 	width: 100%; 
-	margin-bottom: 10px; 
 	background: rgba(0,0,0,0.3);
 	border: none;
 	outline: none;

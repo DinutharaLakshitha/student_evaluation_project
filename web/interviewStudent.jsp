@@ -7,6 +7,9 @@
         }
         else{
             occupation=(String)session.getAttribute("occupation");
+            if (!occupation.equals("interviewer")){
+                response.sendRedirect("index.jsp");
+            }
         }
     }catch(Exception e){
     }

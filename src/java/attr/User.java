@@ -49,7 +49,7 @@ public class User {
             Statement stmt;
           
             stmt = con.createStatement();
-            rs = stmt.executeQuery("select * from users where user_name = '"+uname+"'");
+            rs = stmt.executeQuery("select * from interviewer where user_name = '"+uname+"'");
             
             
         
@@ -59,6 +59,27 @@ public class User {
         }
         
         return rs;
+    }
+    
+    public boolean registerUser(String user_name,String occupation,String tel,String pass) throws IOException{
+        ResultSet rs = null;
+        boolean success=false;
+        try {
+            DbConnector db = new DbConnector();
+            Connection con =db.getCon();
+            Statement stmt;
+          
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("INSERT INTO interviewer (`user_name`, `password`, `tel`, `occupation`) VALUES ('', '"+user_name+"', '"+pass+"', '"+tel+"', '"+occupation+"')");
+            success=true;
+            
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        
+        return success;
     }
     
 }

@@ -62,7 +62,7 @@ public class Login extends HttpServlet {
                 response.sendRedirect("home.jsp");
            }
            else{
-                session.setAttribute("error","errorOccured");
+                session.setAttribute("error","Invalid Username or Password");
                 response.sendRedirect("index.jsp");
             }
         } catch (SQLException ex) { 

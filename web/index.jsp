@@ -21,12 +21,11 @@
   <div class="login">
 	<h1>Login</h1>
     <form method="post" action="Login">
-        <%try{
         
-        String error =(String)session.getAttribute("error");
-        if (error.equals("errorOccured")){
-            session.removeAttribute("error");%>
-            <label style="padding-left:55px; padding-right:55px;">Invalid Username or Password</label>
+        <%try{
+        if (session.getAttribute("error")!=null){%>        
+            <label style="padding-left:55px;padding-right: 55px;"><%String error =(String)session.getAttribute("error");
+            session.removeAttribute("error"); out.print(error);%> </label>
         <%}
         }catch(Exception e){
         }%>
