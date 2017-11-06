@@ -70,13 +70,12 @@ public class User {
             Statement stmt;
           
             stmt = con.createStatement();
-            rs = stmt.executeQuery("INSERT INTO interviewer (`user_name`, `password`, `tel`, `occupation`) VALUES ('', '"+user_name+"', '"+pass+"', '"+tel+"', '"+occupation+"')");
+            
+            stmt.executeUpdate("INSERT INTO interviewer (user_name,password,telephone,occupation) VALUES ('"+user_name+"', '"+pass+"', '"+tel+"', '"+occupation+"')");
             success=true;
             
         
-        } catch (SQLException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-            
+        } catch (SQLException ex) {  
         }
         
         return success;

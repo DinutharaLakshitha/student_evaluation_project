@@ -24,8 +24,8 @@
         
         <%try{
         if (session.getAttribute("error")!=null){%>        
-            <label style="padding-left:55px;padding-right: 55px;"><%String error =(String)session.getAttribute("error");
-            session.removeAttribute("error"); out.print(error);%> </label>
+            <center> <label class="label_error" style="padding-left:55px;padding-right: 55px;"><%String error =(String)session.getAttribute("error");
+            session.removeAttribute("error"); out.print(error);%> </label></center> 
         <%}
         }catch(Exception e){
         }%>

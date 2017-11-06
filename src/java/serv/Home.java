@@ -44,42 +44,7 @@ public class Home extends HttpServlet {
             if(session.getAttribute("uname")==null){
                 response.sendRedirect("index.jsp");    
            }
-//            HttpSession session=request.getSession(); 
-//            String name=(String)session.getAttribute("uname");
-//            
-//            User u=new User();
-//            ResultSet rs=u.getDetails(name);
-//            
-//            String occupation=rs.getString("occupation");
-//            String tel=rs.getString("tel");
-              
 
-//            String name = request.getParameter("uname");
-//          
-//            out.println(name);
-//           
-//            String pass = request.getParameter("pass");
-//            out.println(pass);
-//            User u =new User();
-//           
-//            out.println("user created");
-//           
-//            ResultSet rs = u.Login(name, pass);
-//            
-//            out.println("stmt worked");
-//            out.println(rs);
-//          
-//            HttpSession session=request.getSession(); 
-//          
-//            if(rs.next()){
-//                String n = rs.getString("user_name");
-//                session.setAttribute("uname",n);
-//                response.sendRedirect("home.jsp");
-//           }
-//           else{
-//                session.setAttribute("error","errorOccured");
-//                response.sendRedirect("index.jsp");
-//            }
         }
     }
 

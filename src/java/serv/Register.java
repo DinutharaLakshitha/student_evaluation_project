@@ -45,19 +45,62 @@ public class Register extends HttpServlet {
             String pass = request.getParameter("pass");
             String confirm_pass = request.getParameter("confirm_pass");
             
-            if (pass==confirm_pass){
+            HttpSession session=request.getSession();
+            if (occupation.equals("null")){
+                session.setAttribute("new_uname",name);
+                //session.setAttribute("new_occupation",occupation);
+                session.setAttribute("tel",tel);
+                session.setAttribute("error","Please select occupation.");
+                response.sendRedirect("registerUser.jsp");
+            }else{
+            
+            if (pass.equals(confirm_pass)){
                 User u =new User();
+                
+                /*out.println(name);
+                out.println(occupation);
+                out.println(tel);
+                out.println(pass);
+                out.println(confirm_pass);*/
+                
+                ResultSet rs = u.getDetails(name);
+                if(rs.next()){
+                    session.setAttribute("new_uname",name);
+                    //session.setAttribute("new_occupation",occupation);
+                    session.setAttribute("tel",tel);
+                    session.setAttribute("error","Username already in use.");
+                    response.sendRedirect("registerUser.jsp");
+                }else{
+                
            
-                boolean success= u.registerUser(name, occupation, tel, pass);
+                    boolean success= u.registerUser(name, occupation, tel, pass);
+
+                    if (success){
+                        session.setAttribute("success","User "+name+" successfully added.");
+                    }else{
+                        session.setAttribute("error","Error occured while adding user.");
+                    }
+                    response.sendRedirect("registerUser.jsp");
+                }
             }
             else{
-                HttpSession session=request.getSession(); 
                 session.setAttribute("new_uname",name);
-                session.setAttribute("new_occupation",occupation);
+                //session.setAttribute("new_occupation",occupation);
                 session.setAttribute("tel",tel);
                 session.setAttribute("error","Password not match");
                 response.sendRedirect("registerUser.jsp");
             }
+            }
+            User u =new User();
+           
+            ResultSet rs = u.getDetails(name);
+            
+            if(rs.next()){
+                
+            }
+            
+            out.println("stmt worked");
+            out.println(rs);
             
         }
     }

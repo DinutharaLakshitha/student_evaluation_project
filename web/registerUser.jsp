@@ -81,26 +81,60 @@ body {font-family: "Lato", sans-serif}
     <!--<div class="w3-container w3-blue-gray w3-section w3-round-large w3-padding-large">-->
     <h1>Register User</h1>
     <form method="post" action="Register">
+        <!--show error-->
         <%try{
           
         if (session.getAttribute("error")!=null){%>
             <br>
-            <label style="padding-left:70px;padding-right: 70px;"><%String error =(String)session.getAttribute("error");
-            session.removeAttribute("error"); out.print(error);%> </label>
+            <center>  
+            <label class="label_error" style="padding-left:60px;padding-right: 60px;"><%String error =(String)session.getAttribute("error");
+            session.removeAttribute("error"); out.print(error);%> </label></center>
         <%}
         }catch(Exception e){
         }%>
-
-        <input style="margin-top:20px;" type="text" name="uname" placeholder="Enter Username" required="required" autofocus="true"/>
+        
+        <!--show success-->
+        <%try{
+          
+        if (session.getAttribute("success")!=null){%>
+            <br>
+            <label class="label_success" style="padding-left:60px;padding-right: 60px;"><%String error =(String)session.getAttribute("success"); session.removeAttribute("success"); out.print(error);%> </label>
+        <%}
+        }catch(Exception e){
+        }%>
+        
+        <%try{
+          
+        if (session.getAttribute("new_uname")!=null){%>
+            <input style="margin-top:20px;" type="text" name="uname" placeholder="Enter Username" required="required" value="<%String new_uname =(String)session.getAttribute("new_uname"); session.removeAttribute("new_uname"); out.print(new_uname);%>"/>
+        <%}else{%>
+            <input style="margin-top:20px;" type="text" name="uname" placeholder="Enter Username" required="required" autofocus="true"/>
+        <%}
+        }catch(Exception e){
+        }%>
+        <!--<input style="margin-top:20px;" type="text" name="uname" placeholder="Enter Username" required="required" autofocus="true"/>-->
+        
+        
         <select class="select" style="margin-top:10px;" required="required" name="occupation">
-            <option value="null">--Choose Occupation--</option>
+            <option value="null" >--Choose Occupation--</option>
             <option value="admin">Admin</option>
             <option value="dataEntry">Data Entry</option>
             <option value="interviewer">Interviewer</option>
-
-         </select>
-        <input style="margin-top:10px;" type="number" name="tel" placeholder="Enter Contact No" required="required" />
-        <input style="margin-top:10px;" type="password" name="pass" placeholder="Enter Password" required="required" />
+        </select>
+        
+        <%try{
+          
+        if (session.getAttribute("tel")!=null){%>
+            <input style="margin-top:10px;" type="number" name="tel" placeholder="Enter Contact No" required="required" value="<%String tel =(String)session.getAttribute("tel"); session.removeAttribute("tel"); out.print(tel);%>"/>
+        <%}else{%>
+            <input style="margin-top:10px;" type="number" name="tel" placeholder="Enter Contact No" required="required"/>
+        <%}
+        }catch(Exception e){
+        }%>
+        <!--<input style="margin-top:10px;" type="number" name="tel" placeholder="Enter Contact No" required="required" />-->
+        
+        
+        <input style="margin-top:10px;" type="password" name="pass" placeholder="Enter Password" required="required" autofocus="true"/>
         <input style="margin-top:10px;" type="password" name="confirm_pass" placeholder="Confirm Password" required="required" />
         <button style="margin-top:20px;" type="submit" value="Register" class="btn btn-primary btn-block btn-large">Register User</button>
     </form>
