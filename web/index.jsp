@@ -26,7 +26,7 @@
         String error =(String)session.getAttribute("error");
         if (error.equals("errorOccured")){
             session.removeAttribute("error");%>
-            <label>Invalid Username or Password</label>
+            <label style="padding-left:55px; padding-right:55px;">Invalid Username or Password</label>
         <%}
         }catch(Exception e){
         }%>

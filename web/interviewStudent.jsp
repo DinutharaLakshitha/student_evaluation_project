@@ -1,14 +1,18 @@
 <%
+    String occupation="none";
     try{
+        
         if(session.getAttribute("uname")==null){
             response.sendRedirect("index.jsp");
+        }
+        else{
+            occupation=(String)session.getAttribute("occupation");
         }
     }catch(Exception e){
     }
     
-    String occupation=(String)session.getAttribute("occupation");
+    
 %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
