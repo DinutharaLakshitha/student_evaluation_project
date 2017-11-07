@@ -37,36 +37,48 @@ public class Login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            String name = request.getParameter("uname");
-          
-            out.println(name);
-           
-            String pass = request.getParameter("pass");
-            out.println(pass);
-            User u =new User();
-           
-            out.println("user created");
-            
-            String encrypted_password=u.returnEncryptedPassword(pass);
-           
-            ResultSet rs = u.Login(name, encrypted_password);
-            
-            
-            out.println("stmt worked");
-            out.println(rs);
-          
             HttpSession session=request.getSession(); 
-          
-            if(rs.next()){
-                String n = rs.getString("user_name");
-                String occupation = rs.getString("occupation");
-                session.setAttribute("uname",n);
-                session.setAttribute("occupation",occupation);
-                response.sendRedirect("home.jsp");
-           }
-           else{
-                session.setAttribute("error","Invalid Username or Password");
+            
+            String name = request.getParameter("uname");
+            
+            String pass = request.getParameter("pass");
+
+            if(name==null){
+                
                 response.sendRedirect("index.jsp");
+                
+            }else{
+
+                //out.println(name);
+
+                //out.println(pass);
+//                if(session.getAttribute("uname")==null){
+//                    
+//                }
+                User u =new User();
+
+                out.println("user created");
+
+                String encrypted_password=u.returnEncryptedPassword(pass);
+
+                ResultSet rs = u.Login(name, encrypted_password);
+
+
+                out.println("stmt worked");
+                out.println(rs);
+
+
+                if(rs.next()){
+                    String n = rs.getString("user_name");
+                    String occupation = rs.getString("role_name");
+                    session.setAttribute("uname",n);
+                    session.setAttribute("occupation",occupation);
+                    response.sendRedirect("home.jsp");
+               }
+               else{
+                    session.setAttribute("error","Invalid Username or Password");
+                    response.sendRedirect("index.jsp");
+                }
             }
         } catch (SQLException ex) { 
         }

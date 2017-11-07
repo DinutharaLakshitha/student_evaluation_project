@@ -11,7 +11,7 @@
 <html >
 <head>
   <meta charset="UTF-8">
-  <title>Login Form</title>
+  <title>~Welcome~</title>
   
 <link rel="stylesheet" href="css/style_index.css">
 
