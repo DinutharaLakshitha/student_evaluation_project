@@ -46,8 +46,11 @@ public class Login extends HttpServlet {
             User u =new User();
            
             out.println("user created");
+            
+            String encrypted_password=u.returnEncryptedPassword(pass);
            
-            ResultSet rs = u.Login(name, pass);
+            ResultSet rs = u.Login(name, encrypted_password);
+            
             
             out.println("stmt worked");
             out.println(rs);
