@@ -39,69 +39,70 @@ public class Register extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String name = request.getParameter("uname");
-            String occupation = request.getParameter("occupation");
-            String tel = request.getParameter("tel");
-            String pass = request.getParameter("pass");
-            String confirm_pass = request.getParameter("confirm_pass");
             
-            HttpSession session=request.getSession();
-            if (occupation.equals("null")){
-                session.setAttribute("new_uname",name);
-                //session.setAttribute("new_occupation",occupation);
-                session.setAttribute("tel",tel);
-                session.setAttribute("error","Please select occupation.");
-                response.sendRedirect("registerUser.jsp");
+            HttpSession session=request.getSession(); 
+
+            if(session.getAttribute("uname")==null){
+                response.sendRedirect("index.jsp");
             }else{
-            
-            if (pass.equals(confirm_pass)){
-                User u =new User();
-                
-                /*out.println(name);
-                out.println(occupation);
-                out.println(tel);
-                out.println(pass);
-                out.println(confirm_pass);*/
-                
-                ResultSet rs = u.getDetails(name);
-                if(rs.next()){
+
+                String name = request.getParameter("new_uname");             
+                String occupation = request.getParameter("occupation");
+                String tel = request.getParameter("tel");
+                String pass = request.getParameter("pass");
+                String confirm_pass = request.getParameter("confirm_pass");
+
+
+                if (occupation.equals("null")){
                     session.setAttribute("new_uname",name);
                     //session.setAttribute("new_occupation",occupation);
                     session.setAttribute("tel",tel);
-                    session.setAttribute("error","Username already in use.");
+                    session.setAttribute("error","Please select occupation.");
                     response.sendRedirect("registerUser.jsp");
                 }else{
-                
-           
-                    boolean success= u.registerUser(name, occupation, tel, pass);
 
-                    if (success){
-                        session.setAttribute("success","User "+name+" successfully added.");
-                    }else{
-                        session.setAttribute("error","Error occured while adding user.");
+                    if (pass.equals(confirm_pass)){
+                        User u =new User();
+
+                        /*out.println(name);
+                        out.println(occupation);
+                        out.println(tel);
+                        out.println(pass);
+                        out.println(confirm_pass);*/
+
+                        ResultSet rs = u.getDetails(name);
+                        
+                        if(rs.next()){
+                            session.setAttribute("new_uname",name);
+                            //session.setAttribute("new_occupation",occupation);
+                            session.setAttribute("tel",tel);
+                            session.setAttribute("error","Username already in use.");
+                            response.sendRedirect("registerUser.jsp");
+                        }else{
+
+                            boolean success= u.registerUser(name, occupation, tel, pass);
+
+                            out.println(success);
+                            if (success){
+                                session.setAttribute("success","User "+name+" successfully added.");
+                            }else{
+                                u.deleteUser(name);
+                                session.setAttribute("error","Error occured while adding user.");
+                            }
+                            response.sendRedirect("registerUser.jsp");
+                        }
                     }
-                    response.sendRedirect("registerUser.jsp");
+                    else{
+                        session.setAttribute("new_uname",name);
+                        //session.setAttribute("new_occupation",occupation);
+                        session.setAttribute("tel",tel);
+                        session.setAttribute("error","Password not match");
+                        response.sendRedirect("registerUser.jsp");
+                    }
                 }
+//                }
+
             }
-            else{
-                session.setAttribute("new_uname",name);
-                //session.setAttribute("new_occupation",occupation);
-                session.setAttribute("tel",tel);
-                session.setAttribute("error","Password not match");
-                response.sendRedirect("registerUser.jsp");
-            }
-            }
-            User u =new User();
-           
-            ResultSet rs = u.getDetails(name);
-            
-            if(rs.next()){
-                
-            }
-            
-            out.println("stmt worked");
-            out.println(rs);
-            
         }
     }
 

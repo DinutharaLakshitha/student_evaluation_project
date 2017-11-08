@@ -106,9 +106,9 @@ body {font-family: "Lato", sans-serif}
         <%try{
           
         if (session.getAttribute("new_uname")!=null){%>
-            <input style="margin-top:20px;" type="text" name="uname" placeholder="Enter Username" required="required" value="<%String new_uname =(String)session.getAttribute("new_uname"); session.removeAttribute("new_uname"); out.print(new_uname);%>"/>
+        <input style="margin-top:20px;" type="text" name="new_uname" placeholder="Enter Username" required="required" value="<%String new_uname =(String)session.getAttribute("new_uname"); session.removeAttribute("new_uname"); out.print(new_uname);%>"/>
         <%}else{%>
-            <input style="margin-top:20px;" type="text" name="uname" placeholder="Enter Username" required="required" autofocus="true"/>
+            <input style="margin-top:20px;" type="text" name="new_uname" placeholder="Enter Username" required="required" autofocus="true"/>
         <%}
         }catch(Exception e){
         }%>
@@ -125,7 +125,7 @@ body {font-family: "Lato", sans-serif}
         <%try{
           
         if (session.getAttribute("tel")!=null){%>
-            <input style="margin-top:10px;" type="number" name="tel" placeholder="Enter Contact No" required="required" value="<%String tel =(String)session.getAttribute("tel"); session.removeAttribute("tel"); out.print(tel);%>"/>
+        <input style="margin-top:10px;" type="number" name="tel" placeholder="Enter Contact No" required="required" value="<%String tel =(String)session.getAttribute("tel"); session.removeAttribute("tel"); out.print(tel);%>"/>
         <%}else{%>
             <input style="margin-top:10px;" type="number" name="tel" placeholder="Enter Contact No" required="required"/>
         <%}
