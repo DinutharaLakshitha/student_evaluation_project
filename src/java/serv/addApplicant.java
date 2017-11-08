@@ -6,6 +6,7 @@
 package serv;
 
 import attr.Applicant;
+import attr.Validation;
 import java.awt.List;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -69,23 +70,41 @@ public class addApplicant extends HttpServlet {
             String gender = request.getParameter("gender");
             String religeon = request.getParameter("religion");
             
+            Validation valid = new Validation();
             
-             
-             /*
+            if(valid.onlyLettersSpaces(f_name)== false){error.add("Invalid First Name");}
+            if(valid.onlyLettersSpaces(l_name)== false){error.add("Invalid Last Name");}
+            if(valid.onlyLettersSpaces(city_name)== false){error.add("Invalid City");}
+            if(valid.onlyLettersSpaces(district)== false){error.add("Invalid District");}
+            if(valid.onlyLettersSpaces(grama)== false){error.add("Invalid Grama Niladari Area");}
+            if(valid.onlyInitials(initial)== false){error.add("Invalid Initials");}
+            if(valid.onlyLettersSpacesdot(street_name)==false){error.add("Invalid Street Name");}
+            
+            if(error.size()>0){
+                response.sendRedirect("addApplicant.jsp");
+            }
+            else{ 
                 Applicant applicant = new Applicant();
             
                 out.println("Object created");
             
                 boolean a = applicant.register(f_name, l_name,initial, gender, dob, h_num, street_name, city_name,district,grama,gender,religeon);
                 out.println(a);
-            }*/
+            }
+            }
+            
+            
+            
+            
+             
+            
             
             
             
             
             
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
