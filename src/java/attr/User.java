@@ -54,13 +54,32 @@ public class User {
           
             stmt = con.createStatement();
             rs = stmt.executeQuery("select * from user where user_name = '"+uname+"'");
-            
-            
+  
         
         } catch (SQLException ex) {   
         }
         
         return rs;
+    }
+    
+    
+    public boolean changeUserPassword(String user_name,String new_password) throws IOException{
+        boolean success=false;
+        //UPDATE user SET `pass = '*A4B6157319038724E3560894F7F932C8886EBFCF' WHERE `interviewer`.`user_id` = 3;
+        try {
+            DbConnector db = new DbConnector();
+            Connection con =db.getCon();
+          
+            
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("UPDATE user SET pass = '"+new_password+"' WHERE user_name='"+user_name+"'");
+            
+            success=true;
+            
+        } catch (SQLException ex) {  
+        }
+        
+        return success;
     }
     
     public boolean registerUser(String user_name,String occupation,String tel,String pass) throws IOException{

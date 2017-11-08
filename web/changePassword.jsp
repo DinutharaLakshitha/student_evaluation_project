@@ -74,8 +74,44 @@ body {font-family: "Lato", sans-serif}
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
 
-  
-  
+<div class="login">
+    <!--<div class="w3-container w3-blue-gray w3-section w3-round-large w3-padding-large">-->
+    <h1>Change Password</h1>
+    <form method="post" action="ChangePassword">
+        <!--show error-->
+        <%try{
+          
+        if (session.getAttribute("error")!=null){%>
+            <br>
+            <center>  
+            <label class="label_error" style="padding-left:60px;padding-right: 60px;"><%String error =(String)session.getAttribute("error");
+            session.removeAttribute("error"); out.print(error);%> </label></center>
+        <%}
+        }catch(Exception e){
+        }%>
+        
+        
+        
+        <!--show success-->
+        <%try{
+          
+        if (session.getAttribute("success")!=null){%>
+            <br>
+            <label class="label_success" style="padding-left:60px;padding-right: 60px;"><%String error =(String)session.getAttribute("success"); session.removeAttribute("success"); out.print(error);%> </label>
+        <%}
+        }catch(Exception e){
+        }%>
+        
+        
+        <input style="margin-top:20px;" type="password" name="current_pass" placeholder="Current Password" required="required" autofocus="true"/>
+        <input style="margin-top:10px;" type="password" name="new_pass" placeholder="New Password" required="required"/>
+        <input style="margin-top:10px;" type="password" name="confirm_pass" placeholder="Confirm Password" required="required" />
+        <button style="margin-top:20px;" type="submit" value="ChangePassword" class="btn btn-primary btn-block btn-large">Change Password</button>
+        
+    </form>
+    <!--</div>-->
+</div>
+        
 <!-- End Page Content -->
 </div>
 

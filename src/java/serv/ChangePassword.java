@@ -23,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author rajitha
  */
-@WebServlet(name = "Register", urlPatterns = {"/Register"})
-public class Register extends HttpServlet {
+@WebServlet(name = "ChangePassword", urlPatterns = {"/ChangePassword"})
+public class ChangePassword extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,73 +39,63 @@ public class Register extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+//            UPDATE `interviewer` SET `password` = '*A4B6157319038724E3560894F7F932C8886EBFCF' WHERE `interviewer`.`user_id` = 3;
             HttpSession session=request.getSession(); 
 
             if(session.getAttribute("uname")==null){
                 response.sendRedirect("index.jsp");
             }else{
-                String name = request.getParameter("new_uname");
                 
-                if (name==null){
-                    response.sendRedirect("registerUser.jsp");
+                String user_name=(String) session.getAttribute("uname");
+                String current_password = request.getParameter("current_pass");             
+                String new_password = request.getParameter("new_pass");
+                String confirm_password = request.getParameter("confirm_pass");
+                
+
+                if (current_password==null){
+                    response.sendRedirect("changePassword.jsp");
                 }else{
-                                 
-                    String occupation = request.getParameter("occupation");
-                    String tel = request.getParameter("tel");
-                    String pass = request.getParameter("pass");
-                    String confirm_pass = request.getParameter("confirm_pass");
 
+                    if (new_password.equals(confirm_password)){
+                        User u =new User();
+                        
+                        String encrypted_password=u.returnEncryptedPassword(current_password);
+                        String encrypted_new_password=u.returnEncryptedPassword(new_password);
 
-                    if (occupation.equals("null")){
-                        session.setAttribute("new_uname",name);
-                        //session.setAttribute("new_occupation",occupation);
-                        session.setAttribute("tel",tel);
-                        session.setAttribute("error","Please select occupation.");
-                        response.sendRedirect("registerUser.jsp");
-                    }else{
+                        out.println(user_name);
+                        out.println(current_password);
+                        out.println(new_password);
+                        out.println(confirm_password);
 
-                        if (pass.equals(confirm_pass)){
-                            User u =new User();
-
-                            /*out.println(name);
-                            out.println(occupation);
-                            out.println(tel);
-                            out.println(pass);
-                            out.println(confirm_pass);*/
-
-                            ResultSet rs = u.getDetails(name);
-
-                            if(rs.next()){
-                                session.setAttribute("new_uname",name);
-                                //session.setAttribute("new_occupation",occupation);
-                                session.setAttribute("tel",tel);
-                                session.setAttribute("error","Username already in use.");
-                                response.sendRedirect("registerUser.jsp");
-                            }else{
-
-                                boolean success= u.registerUser(name, occupation, tel, pass);
-
-                                out.println(success);
+                        ResultSet rs = u.getDetails(user_name);
+                        
+                        if(rs.next()){
+                            String old_password=(String) rs.getString("pass");
+                            if (old_password.equals(encrypted_password)){
+                                boolean success=u.changeUserPassword(user_name, encrypted_new_password);
                                 if (success){
-                                    session.setAttribute("success","User "+name+" successfully added.");
+                                    session.setAttribute("success","Password successfully changed.");
                                 }else{
-                                    u.deleteUser(name);
-                                    session.setAttribute("error","Error occured while adding user.");
+                                    session.setAttribute("error","Erorr while changing password.");
                                 }
-                                response.sendRedirect("registerUser.jsp");
+                                
+                                response.sendRedirect("changePassword.jsp");
+                            }
+                            else{
+                                session.setAttribute("error","Wrong password.Try again.");
+                                response.sendRedirect("changePassword.jsp");
                             }
                         }
-                        else{
-                            session.setAttribute("new_uname",name);
-                            //session.setAttribute("new_occupation",occupation);
-                            session.setAttribute("tel",tel);
-                            session.setAttribute("error","Password not match");
-                            response.sendRedirect("registerUser.jsp");
-                        }
+                    }
+                    else{
+                        
+                        session.setAttribute("error","New password not match");
+                        response.sendRedirect("changePassword.jsp");
                     }
                 }
+
             }
+            
         }
     }
 
@@ -124,7 +114,7 @@ public class Register extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -142,7 +132,7 @@ public class Register extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

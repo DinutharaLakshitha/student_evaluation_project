@@ -98,7 +98,8 @@ body {font-family: "Lato", sans-serif}
           
         if (session.getAttribute("success")!=null){%>
             <br>
-            <label class="label_success" style="padding-left:60px;padding-right: 60px;"><%String error =(String)session.getAttribute("success"); session.removeAttribute("success"); out.print(error);%> </label>
+            <center>
+            <label class="label_success" style="padding-left:60px;padding-right: 60px;"><%String error =(String)session.getAttribute("success"); session.removeAttribute("success"); out.print(error);%> </label></center>
         <%}
         }catch(Exception e){
         }%>
