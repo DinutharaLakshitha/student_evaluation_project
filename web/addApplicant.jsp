@@ -84,7 +84,7 @@ body {font-family: "Lato", sans-serif}
         
         ArrayList error =(ArrayList)session.getAttribute("Error");
         for (int i = 0; i < error.size(); i++) {%>
-        <label><%out.println(error.get(i));%></label>
+        <label><%out.println(error.get(i));%></label><br><br>
         <%}
         }catch(Exception e){
         }%>
