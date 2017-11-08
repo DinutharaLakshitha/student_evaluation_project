@@ -6,11 +6,13 @@
 package serv;
 
 import attr.Applicant;
+import attr.Validation;
 import java.awt.List;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -64,14 +66,38 @@ public class addApplicant extends HttpServlet {
             String b_day = request.getParameter("date");
             String b_month = request.getParameter("month");
             
-            String dob = "0000-00-00";
+            
             
             String gender = request.getParameter("gender");
             String religeon = request.getParameter("religion");
             
+            Validation valid = new Validation();
             
-             
-             
+            if(valid.onlyLettersSpaces(f_name)== false){error.add("Invalid First Name");}
+            if(valid.onlyLettersSpaces(l_name)== false){error.add("Invalid Last Name");}
+            if(valid.onlyLettersSpaces(city_name)== false){error.add("Invalid City");}
+            if(valid.onlyLettersSpaces(district)== false){error.add("Invalid District");}
+            if(valid.onlyLettersSpaces(grama)== false){error.add("Invalid Grama Niladari Area");}
+            if(valid.onlyInitials(initial)== false){error.add("Invalid Initials");}
+            if(valid.onlyLettersSpacesdot(street_name)==false){error.add("Invalid Street Name");}
+            if(b_day == "Date"){error.add("Input a date");}
+            if(b_month == "Month"){error.add("Input a month");}
+            
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            
+            if(b_month == "01"){year-=4;}
+            else{year-=5;}
+            
+            String Year = Integer.toString(year);
+            
+            String dob = Year+"-"+b_month+"-"+b_day;
+            
+            
+            
+            if(error.size()>0){
+                response.sendRedirect("addApplicant.jsp");
+            }
+            else{ 
                 Applicant applicant = new Applicant();
             
                 out.println("Object created");
@@ -79,6 +105,13 @@ public class addApplicant extends HttpServlet {
                 boolean a = applicant.register(f_name, l_name,initial, gender, dob, h_num, street_name, city_name,district,grama,gender,religeon);
                 out.println(a);
             }
+            }
+            
+            
+            
+            
+             
+            
             
             
             
