@@ -5,12 +5,11 @@
  */
 package serv;
 
-import attr.Applicant;
-import java.awt.List;
+import attr.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,10 +21,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Dinuthara
+ * @author ANTIROOKIE
  */
-@WebServlet(name = "addApplicant", urlPatterns = {"/addApplicant"})
-public class addApplicant extends HttpServlet {
+@WebServlet(name = "ViewProfile", urlPatterns = {"/ViewProfile"})
+public class ViewProfile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,57 +34,49 @@ public class addApplicant extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            ArrayList<String> error;
-            error = new ArrayList<>();
-            HttpSession session=request.getSession();
-            session.setAttribute("Error", error);
+                     
+            HttpSession session=request.getSession(); 
+            String name = (String) session.getAttribute("uname");
+            User u =new User();
+           
+            out.println("user created");
+           
+            ResultSet rs = u.getDetails(name);
             
             
+            out.println("stmt worked");
+            out.println(rs);
             
-         
-            String f_name = request.getParameter("txt_fname");
-            String initial = request.getParameter("txt_init");
-            String l_name = request.getParameter("txt_lname");
+            if(rs.next()){
+                String result1 = rs.getString("user_id");
+                String result2 = rs.getString("user_name");
+                String result3 = rs.getString("telephone");
+                String result4 = rs.getString("email");              
+                session.setAttribute("details_user_id", result1);
+                session.setAttribute("details_user_name", result2);
+                session.setAttribute("details_telephone", result3);
+                session.setAttribute("details_user_email", result4);
+                
+                out.print(result1);
+                out.print(result2);
+                out.print(result3);
+                out.print(result4);
+                
        
-            String h_num = request.getParameter("txt_home_num");
-            String street_name = request.getParameter("txt_street_name");
-            String city_name = request.getParameter("txt_city_name");
-            String district = request.getParameter("txt_district");
-            String grama = request.getParameter("txt_grama");
-            
-            
-            String b_day = request.getParameter("date");
-            String b_month = request.getParameter("month");
-            
-            String dob = "0000-00-00";
-            
-            String gender = request.getParameter("gender");
-            String religeon = request.getParameter("religion");
-            
-            
-             
-             
-                Applicant applicant = new Applicant();
-            
-                out.println("Object created");
-            
-                boolean a = applicant.register(f_name, l_name,initial, gender, dob, h_num, street_name, city_name,district,grama,gender,religeon);
-                out.println(a);
+                
+                response.sendRedirect("viewProfile.jsp");
+           }
+           else{
+                session.setAttribute("error","errorOccured");
+                response.sendRedirect("index.jsp");
             }
-            
-            
-            
-            
-            
         }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -102,7 +93,7 @@ public class addApplicant extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(addApplicant.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewProfile.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -120,7 +111,7 @@ public class addApplicant extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(addApplicant.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewProfile.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
