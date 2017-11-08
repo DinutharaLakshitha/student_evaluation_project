@@ -3,12 +3,12 @@
     try{
         
         if(session.getAttribute("uname")==null){
-            response.sendRedirect("index.jsp");
+            //response.sendRedirect("index.jsp");
         }
         else{
             occupation=(String)session.getAttribute("occupation");
             if (!occupation.equals("interviewer")){
-                response.sendRedirect("index.jsp");
+                //response.sendRedirect("index.jsp");
             }
         }
     }catch(Exception e){
@@ -76,9 +76,28 @@ body {font-family: "Lato", sans-serif}
   
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
-
     
+    <div class ="login">
+<form method ="post" action="searchApplicant">
+    <h2>Search by Applicant ID</h2>
+    <%try{
+        if (session.getAttribute("error")!=null){%>  
+        <br><br>
+            <center> <label class="label_error" style="padding-left:55px;padding-right: 55px;"><%String error =(String)session.getAttribute("error");
+            session.removeAttribute("error"); out.print(error);%> </label></center> 
+        <%}
+        }catch(Exception e){
+        }%>
+        
+    
+  <br>
+  <input type="text" name="applicant_id">
   
+  
+  <br><br>
+  <button type="submit" class="btn btn-primary btn-block btn-large">Search</button>
+</form>     
+    </div>
   
 <!-- End Page Content -->
 </div>
@@ -97,7 +116,7 @@ function carousel() {
        x[i].style.display = "none";  
     }
     myIndex++;
-    if (myIndex > x.length) {myIndex = 1}    
+    if (myIndex > x.length) {myIndex = 1;}    
     x[myIndex-1].style.display = "block";  
     setTimeout(carousel, 4000);    
 }
@@ -105,7 +124,7 @@ function carousel() {
 // Used to toggle the menu on small screens when clicking on the menu button
 function myFunction() {
     var x = document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show") == -1) {
+    if (x.className.indexOf("w3-show") === -1) {
         x.className += " w3-show";
     } else { 
         x.className = x.className.replace(" w3-show", "");
