@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%
     String occupation="none";
     try{
@@ -76,20 +77,17 @@ body {font-family: "Lato", sans-serif}
 
 <div class="login">
     <!--<div class="w3-container w3-blue-gray w3-section w3-round-large w3-padding-large">-->
-    <h1>Change Password</h1>
+    <h1 style="margin-bottom: 20px;">Change Password</h1>
     <form method="post" action="ChangePassword">
-        <!--show error-->
+        <!--show error array-->
         <%try{
-          
-        if (session.getAttribute("error")!=null){%>
-            <br>
-            <center>  
-            <label class="label_error" style="padding-left:60px;padding-right: 60px;"><%String error =(String)session.getAttribute("error");
-            session.removeAttribute("error"); out.print(error);%> </label></center>
+        
+        ArrayList error =(ArrayList)session.getAttribute("Error"); session.removeAttribute("Error");
+        for (int i = 0; i < error.size(); i++) {%>
+        <label class="label_error" style="text-align:center;"><%out.println(error.get(i));%></label><br>
         <%}
         }catch(Exception e){
         }%>
-        
         
         
         <!--show success-->
@@ -97,7 +95,7 @@ body {font-family: "Lato", sans-serif}
           
         if (session.getAttribute("success")!=null){%>
             <br>
-            <label class="label_success" style="padding-left:60px;padding-right: 60px;"><%String error =(String)session.getAttribute("success"); session.removeAttribute("success"); out.print(error);%> </label>
+            <label class="label_ok" style="text-align:center;"><%String error =(String)session.getAttribute("success"); session.removeAttribute("success"); out.print(error);%> </label>
         <%}
         }catch(Exception e){
         }%>
