@@ -1,7 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%
-    String occupation="dataEntry";
-    /*try{
+    String occupation=null;
+    try{
         
         if(session.getAttribute("uname")==null){
             response.sendRedirect("index.jsp");
@@ -10,7 +10,7 @@
             occupation=(String)session.getAttribute("occupation");
         }
     }catch(Exception e){
-    }*/
+    }
     
     
     
@@ -20,7 +20,7 @@
 
 <!DOCTYPE html>
 <html>
-<title>Register User</title>
+<title>Add Applicant</title>
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,7 +90,7 @@ body {font-family: "Lato", sans-serif}
         }%>
         
         <h4 style="color:blue;" >NAME</h4>
-        <input type="text"  name="txt_fname" placeholder="First Name" required="required" />
+        <input type="text"  name="txt_fname" placeholder="First Name" required="required"  />
         <input type="text"  name="txt_lname" placeholder="Last Name" required="required" />
         <input type="text"  name="txt_init" placeholder="Initials" required="required" />
         <h4 style="color:blue;" >ADDRESS</h4>
