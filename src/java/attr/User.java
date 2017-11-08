@@ -162,4 +162,25 @@ public class User {
         return encrypted_password;
     }
     
+    public String putMarks() throws IOException{
+       ResultSet rs = null;
+        
+        try {
+            DbConnector db = new DbConnector();
+            Connection con =db.getCon();
+            Statement stmt;
+          
+            stmt = con.createStatement();
+            //rs = stmt.executeQuery("select * from interview");
+            stmt.executeUpdate("insert into interview values('1','1','12','2017-11-18')");
+            
+        
+        } catch (SQLException ex) {   
+            return ex.toString();
+        }
+        
+        
+     return "success";   
+    }
+    
 }
