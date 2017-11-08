@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%
     String occupation="none";
     try{
@@ -33,6 +34,7 @@
 body {font-family: "Lato", sans-serif}
 .mySlides {display: none}
 </style>
+
 <body>
 
 <!-- Navbar -->
@@ -79,27 +81,25 @@ body {font-family: "Lato", sans-serif}
     
 <div class="login">
     <!--<div class="w3-container w3-blue-gray w3-section w3-round-large w3-padding-large">-->
-    <h1>Register User</h1>
+    <h1 style="margin-bottom: 20px;">Register User</h1>
     <form method="post" action="Register">
-        <!--show error-->
+        
+        <!--show error array-->
         <%try{
-          
-        if (session.getAttribute("error")!=null){%>
-            <br>
-            <center>  
-            <label class="label_error" style="padding-left:60px;padding-right: 60px;"><%String error =(String)session.getAttribute("error");
-            session.removeAttribute("error"); out.print(error);%> </label></center>
+        
+        ArrayList error =(ArrayList)session.getAttribute("Error"); session.removeAttribute("Error");
+        for (int i = 0; i < error.size(); i++) {%>
+        <label class="label_error" style="text-align:center;"><%out.println(error.get(i));%></label><br>
         <%}
         }catch(Exception e){
         }%>
+        
         
         <!--show success-->
         <%try{
           
         if (session.getAttribute("success")!=null){%>
-            <br>
-            <center>
-            <label class="label_success" style="padding-left:60px;padding-right: 60px;"><%String error =(String)session.getAttribute("success"); session.removeAttribute("success"); out.print(error);%> </label></center>
+        <label class="label_ok" style="text-align:center;"><%String error =(String)session.getAttribute("success"); session.removeAttribute("success"); out.print(error);%> </label><br>
         <%}
         }catch(Exception e){
         }%>
@@ -133,6 +133,17 @@ body {font-family: "Lato", sans-serif}
         }catch(Exception e){
         }%>
         <!--<input style="margin-top:10px;" type="number" name="tel" placeholder="Enter Contact No" required="required" />-->
+        
+        
+        <%try{
+          
+        if (session.getAttribute("email")!=null){%>
+        <input style="margin-top:10px;" type="text" name="email" pattern="[a-zA-Z0-9.-_]{3,}@[a-zA-Z0-9]{3,}[.]{1}[a-zA-Z]{2,}" placeholder="Enter E-mail" required="required" value="<%String email =(String)session.getAttribute("email"); session.removeAttribute("email"); out.print(email);%>"/>
+        <%}else{%>
+            <input style="margin-top:10px;" type="text" name="email" pattern="[a-zA-Z0-9.-_]{3,}@[a-zA-Z0-9]{3,}[.]{1}[a-zA-Z]{2,}" placeholder="Enter E-mail" required="required"/>
+        <%}
+        }catch(Exception e){
+        }%>
         
         
         <input style="margin-top:10px;" type="password" name="pass" placeholder="Enter Password" required="required" autofocus="true"/>
