@@ -1,18 +1,17 @@
+<%@page import="java.util.ArrayList"%>
 <%
-    String occupation="none";
-    try{
+    String occupation="dataEntry";
+    /*try{
         
         if(session.getAttribute("uname")==null){
             response.sendRedirect("index.jsp");
         }
         else{
             occupation=(String)session.getAttribute("occupation");
-            if (!occupation.equals("dataEntry")){
-                response.sendRedirect("index.jsp");
-            }
         }
     }catch(Exception e){
-    }
+    }*/
+    
     
     
 %>
@@ -21,7 +20,7 @@
 
 <!DOCTYPE html>
 <html>
-<title>Add Applicant</title>
+<title>Register User</title>
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -80,32 +79,29 @@ body {font-family: "Lato", sans-serif}
     
     <div class="login">
 	<h1>Add Applicant</h1>
-    <form method="post" action="addapplicant">
+    <form method="post" action="addApplicant">
         <%try{
         
-        String error =(String)session.getAttribute("error");
-        if (error.equals("errorOccured")){
-            session.removeAttribute("error");%>
-            <label>Invalid Username or Password</label>
+        ArrayList error =(ArrayList)session.getAttribute("Error");
+        for (int i = 0; i < error.size(); i++) {%>
+        <label><%out.println(error.get(i));%></label>
         <%}
         }catch(Exception e){
         }%>
         
-        <h4 style="color:blue;">ID</h4>
-        <input style="margin-top:10px;" type="text" name="txt_idno" placeholder="Application Number" />
         <h4 style="color:blue;" >NAME</h4>
-        <input style="margin-top:10px;" type="text"  name="txt_fname" placeholder="First Name" />
-        <input style="margin-top:10px;" type="text"  name="txt_mname" placeholder="Middle Name Initial in Capital" />
-        <input style="margin-top:10px;" type="text"  name="txt_lname" placeholder="Last Name" />
+        <input type="text"  name="txt_fname" placeholder="First Name" required="required" />
+        <input type="text"  name="txt_lname" placeholder="Last Name" required="required" />
+        <input type="text"  name="txt_init" placeholder="Initials" required="required" />
         <h4 style="color:blue;" >ADDRESS</h4>
-        <input style="margin-top:10px;" type="text"  name="txt_home_num" placeholder="Home Number"  />
-        <input style="margin-top:10px;" type="text"  name="txt_street_name" placeholder="Street Name"  />
-        <input style="margin-top:10px;" type="text"  name="txt_city_name" placeholder="City" />
-        <h4 style="color:blue;" >Contact</h4>
-        <input type="text" name="txt_phone" placeholder="Phone Number" />
+        <input type="text"  name="txt_home_num" placeholder="Home Number" required="required"  />
+        <input type="text"  name="txt_street_name" placeholder="Street Name" required="required"  />
+        <input type="text"  name="txt_city_name" placeholder="City" required="required" />
+        <input type="text"  name="txt_grama" placeholder="Grama Niladhari Area" required="required" />
+        <input type="text"  name="txt_district" placeholder="District" required="required" />
         <h4 style="color:blue;" >Date of Birth</h4>
               
-                <select class="select" style="margin-top:10px;" name="date">
+        <select class="select" name="date" >
                   <option value="NO">Date</option>
                   <option value="0">0</option>
                   <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
@@ -119,29 +115,36 @@ body {font-family: "Lato", sans-serif}
 
 
                 </select>
-        
-        
-                <select class="select" style="margin-top:10px;" name="month">
+        <select class="select" name="month" >
                   <option value="NO">Month</option>
-                  <option value="1">jan</option>
-                  <option value="2">feb</option>
-                  <option value="3">mar</option>
-                  <option value="4">aprl</option>
-                  <option value="5">may</option>
-                  <option value="6">june</option>
-                  <option value="7">july</option>
-                  <option value="8">aug</option>
-                  <option value="9">sep</option>
+                  <option value="01">jan</option>
+                  <option value="02">feb</option>
+                  <option value="03">mar</option>
+                  <option value="04">aprl</option>
+                  <option value="05">may</option>
+                  <option value="06">june</option>
+                  <option value="07">july</option>
+                  <option value="08">aug</option>
+                  <option value="09">sep</option>
                   <option value="10">oct</option>
                   <option value="11">nov</option>
                   <option value="13">dec</option>
 
                 </select>
-                <br>
-              <h4 style="color:blue;" >Distance</h4>
-                <input style="margin-top:10px;" style="margin-top:20px;" type="text" name="txt_distance" placeholder="Distance from home" />
+                <h4 style="color:blue;" >GENDER</h4>
+                <select class="select" name="gender">
+                  <option value="male">male</option>
+                  <option value="female">female</option>
+                </select>
+                <h4 style="color:blue;">RELIGION</h4>
+                <select class="select" name="religion">
+                  <option value="buddhist">Buddhist</option>
+                  <option value="christian">Christian</option>
+                  <option value="hindu">Hindu</option>
+                  <option value="islam">Islam</option>
+                </select>
               
-            <button style="margin-top:20px;" type="submit" value="addstudent" class="btn btn-primary btn-block btn-large">Add Applicant</button>
+            <button style="margin-top:20px;" type="submit" value="addApplicant" class="btn btn-primary btn-block btn-large">Add Applicant</button>
     </form>
 </div>
   
