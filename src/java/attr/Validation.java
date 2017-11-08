@@ -9,6 +9,7 @@ package attr;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 /**
  *
  * @author Dinuthara
@@ -16,50 +17,66 @@ import java.util.regex.Pattern;
 public class Validation {
     
     public boolean onlyLettersSpaces(String s){
-  for(int i=0;i<s.length();i++){
-    char ch = s.charAt(i);
-    if (Character.isLetter(ch) || ch == ' ') {
-      continue;
+        for(int i=0;i<s.length();i++){
+          char ch = s.charAt(i);
+          if (Character.isLetter(ch) || ch == ' ') {
+            continue;
+          }
+          return false;
+        }
+        return true;
     }
-    return false;
-  }
-  return true;
-}
     
- public  boolean addressValidation(String address) {
-String regex;
-regex = "^[a-zA-Z0-9.-/s]+$";
-String pattern = null;
-Pattern r = Pattern.compile(pattern); 
-Matcher m = r.matcher(address);
- 
-if(m.find()) {
- return true;
-} else {
- return false;
-}
-}
- 
-     public boolean onlyLettersSpacesdot(String s){
-  for(int i=0;i<s.length();i++){
-    char ch = s.charAt(i);
-    if (Character.isLetter(ch) || ch == ' ' || ch =='.') {
-      continue;
+    public  boolean addressValidation(String address) {
+        String regex;
+        regex = "^[a-zA-Z0-9.-/s]+$";
+        String pattern = null;
+        Pattern r = Pattern.compile(pattern); 
+        Matcher m = r.matcher(address);
+
+        if(m.find()) {
+         return true;
+        } else {
+         return false;
+        }
     }
-    return false;
-  }
-  return true;
-}
+ 
+    public boolean onlyLettersSpacesdot(String s){
+        for(int i=0;i<s.length();i++){
+        char ch = s.charAt(i);
+        if (Character.isLetter(ch) || ch == ' ' || ch =='.') {
+         continue;
+        }
+        return false;
+        }
+        return true;
+    }
      
-          public boolean onlyInitials(String s){
-  for(int i=0;i<s.length();i++){
-    char ch = s.charAt(i);
-    if (Character.isUpperCase(ch) || ch =='.') {
-      continue;
+    public boolean onlyInitials(String s){
+        for(int i=0;i<s.length();i++){
+        char ch = s.charAt(i);
+        if (Character.isUpperCase(ch) || ch =='.') {
+        continue;
+        }
+        return false;
+        }
+        return true;
     }
-    return false;
-  }
-  return true;
-}
+    
+    private Pattern pattern;
+    private Matcher matcher;
+    private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
+    /**
+     * Validate password with regular expression
+     * @param password password for validation
+     * @return true valid password, false invalid password
+     */
+    public boolean validatePasswordStrong(final String password){
+            pattern = Pattern.compile(PASSWORD_PATTERN);
+            matcher = pattern.matcher(password);
+            return matcher.matches();
+
+    }
+    
     
 }
