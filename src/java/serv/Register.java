@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -41,6 +42,9 @@ public class Register extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             HttpSession session=request.getSession(); 
+            ArrayList<String> error;
+            error = new ArrayList<>();
+            session.setAttribute("Error", error);
 
             if(session.getAttribute("uname")==null){
                 response.sendRedirect("index.jsp");
@@ -53,26 +57,60 @@ public class Register extends HttpServlet {
                                  
                     String occupation = request.getParameter("occupation");
                     String tel = request.getParameter("tel");
+                    String email = request.getParameter("email");
                     String pass = request.getParameter("pass");
                     String confirm_pass = request.getParameter("confirm_pass");
-
-
+                    
+                    User u =new User();
+                    
+                    ResultSet rs = u.getDetails(name);
+                    if(rs.next()){
+                        error.add("Username already in use.");
+                    }
+                    
                     if (occupation.equals("null")){
+                        error.add("Please select occupation.");
+                    }
+                    
+                    if (tel.length()!=10){
+                        error.add("Invalid contact number.");
+                    }
+                    
+//                    if (email validate)
+                    
+                    if (pass.length()<6){
+                        error.add("Password too short.");
+                    }else{
+                        if (!pass.equals(confirm_pass)){
+                            error.add("Password not match.");
+                        }
+                    }
+                    
+
+                    if (error.size()>0){
                         session.setAttribute("new_uname",name);
-                        //session.setAttribute("new_occupation",occupation);
                         session.setAttribute("tel",tel);
-                        session.setAttribute("error","Please select occupation.");
+                        session.setAttribute("email",email);
                         response.sendRedirect("registerUser.jsp");
                     }else{
+                        boolean success= u.registerUser(name,occupation,tel,pass,email);
+                        
+                        out.println(success);
+                        if (success){
+                            session.setAttribute("success","User "+name+" successfully added.");
+                        }else{
+                            u.deleteUser(name);
+                            error.add("Error occured while adding user.");
+                            //session.setAttribute("error","Error occured while adding user.");
+                        }
+                        response.sendRedirect("registerUser.jsp");
+                    }
+                    
+                    /*else{
 
                         if (pass.equals(confirm_pass)){
                             User u =new User();
-
-                            /*out.println(name);
-                            out.println(occupation);
-                            out.println(tel);
-                            out.println(pass);
-                            out.println(confirm_pass);*/
+                            
 
                             ResultSet rs = u.getDetails(name);
 
@@ -103,7 +141,7 @@ public class Register extends HttpServlet {
                             session.setAttribute("error","Password not match");
                             response.sendRedirect("registerUser.jsp");
                         }
-                    }
+                    }*/
                 }
             }
         }
