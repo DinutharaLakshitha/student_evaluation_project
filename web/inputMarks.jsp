@@ -3,12 +3,12 @@
     try{
         
         if(session.getAttribute("uname")==null){
-            //response.sendRedirect("index.jsp");
+            response.sendRedirect("index.jsp");
         }
         else{
             occupation=(String)session.getAttribute("occupation");
             if (!occupation.equals("interviewer")){
-                //response.sendRedirect("index.jsp");
+                response.sendRedirect("index.jsp");
             }
         }
     }catch(Exception e){
@@ -77,7 +77,7 @@ body {font-family: "Lato", sans-serif}
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
     <div class ="login">
 <form method ="post" action="putMarks">
-    <h2>Interviewer :</h2> 
+    <h2>Interviewer :</h2> <% out.println(session.getAttribute("uname")); %>
     <h2>Input marks for Applicant :<% out.println(session.getAttribute("applicant")); %></h2>
   Questionare marks :<br>
   <input type="text" name="mark1">

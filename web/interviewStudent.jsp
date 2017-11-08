@@ -3,12 +3,12 @@
     try{
         
         if(session.getAttribute("uname")==null){
-            //response.sendRedirect("index.jsp");
+            response.sendRedirect("index.jsp");
         }
         else{
             occupation=(String)session.getAttribute("occupation");
             if (!occupation.equals("interviewer")){
-                //response.sendRedirect("index.jsp");
+                response.sendRedirect("index.jsp");
             }
         }
     }catch(Exception e){
