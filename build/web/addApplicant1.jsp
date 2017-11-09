@@ -32,21 +32,20 @@
 body {font-family: "Lato", sans-serif}
 .mySlides {display: none}
 </style>
-<body><!hbh>
+<body>
 
 <!-- Navbar -->
 <div class="w3-top">
   <div class="w3-bar w3-black w3-card">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a href="home.jsp" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-    <a href="ViewProfile" class="w3-bar-item w3-button w3-padding-large w3-hide-small">VIEW PROFILE</a>
+    <a href="viewProfile.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">VIEW PROFILE</a>
     <a href="changePassword.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CHANGE PASSWORD</a>
     <% if (occupation.equals("admin")){%>
           <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-orange">ADD USER</a>
     <%}%>
     <% if (occupation.equals("dataEntry")){%>
-          <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-orange">ADD APPLICANT</a>
-          <a href="addSchool.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ADD SCHOOL</a>
+          <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ADD APPLICANT</a>
     <%}%>
     <% if (occupation.equals("interviewer")){%>
           <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">INTERVIEW STUDENT</a>
@@ -59,13 +58,13 @@ body {font-family: "Lato", sans-serif}
 
 <!-- Navbar on small screens -->
 <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-  <a href="ViewProfile" class="w3-bar-item w3-button w3-padding-large">VIEW PROFILE</a>
+  <a href="viewProfile.jsp" class="w3-bar-item w3-button w3-padding-large">VIEW PROFILE</a>
   <a href="changePassword.jsp" class="w3-bar-item w3-button w3-padding-large">CHANGE PASSWORD</a>
   <% if (occupation.equals("admin")){%>
           <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large w3-orange">ADD USER</a>
   <%}%>
   <% if (occupation.equals("dataEntry")){%>
-          <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large w3-orange">ADD APPLICANT</a>
+          <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large">ADD APPLICANT</a>
   <%}%>
   <% if (occupation.equals("interviewer")){%>
           <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large">INTERVIEW STUDENT</a>
@@ -84,9 +83,8 @@ body {font-family: "Lato", sans-serif}
         <%try{
         
         ArrayList error =(ArrayList)session.getAttribute("Error");
-        session.removeAttribute("Error");
         for (int i = 0; i < error.size(); i++) {%>
-        <label><%out.println(error.get(i));%></label><br><br>
+        <label class="label_error" style="text-align:center;"><%out.println(error.get(i));%></label><br><br>
         <%}
         }catch(Exception e){
         }%>

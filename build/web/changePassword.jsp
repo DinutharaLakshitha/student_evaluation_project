@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%
     String occupation="none";
     try{
@@ -18,7 +19,7 @@
 
 <!DOCTYPE html>
 <html>
-<title>Home</title>
+<title>Change Password</title>
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,15 +37,14 @@ body {font-family: "Lato", sans-serif}
 <div class="w3-top">
   <div class="w3-bar w3-black w3-card">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="home.jsp" class="w3-bar-item w3-button w3-padding-large w3-orange">HOME</a>
-    <a href="ViewProfile" class="w3-bar-item w3-button w3-padding-large w3-hide-small">VIEW PROFILE</a>
-    <a href="changePassword.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CHANGE PASSWORD</a>
+    <a href="home.jsp" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+    <a href="viewProfile.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">VIEW PROFILE</a>
+    <a href="changePassword.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-orange">CHANGE PASSWORD</a>
     <% if (occupation.equals("admin")){%>
           <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ADD USER</a>
     <%}%>
     <% if (occupation.equals("dataEntry")){%>
           <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ADD APPLICANT</a>
-          <a href="addSchool.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ADD SCHOOL</a>
     <%}%>
     <% if (occupation.equals("interviewer")){%>
           <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">INTERVIEW STUDENT</a>
@@ -57,14 +57,13 @@ body {font-family: "Lato", sans-serif}
 
 <!-- Navbar on small screens -->
 <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-  <a href="ViewProfile" class="w3-bar-item w3-button w3-padding-large">VIEW PROFILE</a>
-  <a href="changePassword.jsp" class="w3-bar-item w3-button w3-padding-large">CHANGE PASSWORD</a>
+  <a href="viewProfile.jsp" class="w3-bar-item w3-button w3-padding-large">VIEW PROFILE</a>
+  <a href="changePassword.jsp" class="w3-bar-item w3-button w3-padding-large w3-orange">CHANGE PASSWORD</a>
   <% if (occupation.equals("admin")){%>
           <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large">ADD USER</a>
   <%}%>
   <% if (occupation.equals("dataEntry")){%>
           <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large">ADD APPLICANT</a>
-          <a href="addSchool.jsp" class="w3-bar-item w3-button w3-padding-large">ADD SCHOOL</a>
   <%}%>
   <% if (occupation.equals("interviewer")){%>
           <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large">INTERVIEW STUDENT</a>
@@ -72,14 +71,45 @@ body {font-family: "Lato", sans-serif}
   <a href="Logout" class="w3-bar-item w3-button w3-padding-large">LOG OUT</a>
  
 </div>
-  
-  
+
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
 
-    <p>test test test</p>
-    <p>test test test</p>
-  
+<div class="login">
+    <!--<div class="w3-container w3-blue-gray w3-section w3-round-large w3-padding-large">-->
+    <h1 style="margin-bottom: 20px;">Change Password</h1>
+    <form method="post" action="ChangePassword">
+        <!--show error array-->
+        <%try{
+        
+        ArrayList error =(ArrayList)session.getAttribute("Error"); session.removeAttribute("Error");
+        for (int i = 0; i < error.size(); i++) {%>
+        <label class="label_error" style="text-align:center;"><%out.println(error.get(i));%></label><br>
+        <%}
+        }catch(Exception e){
+        }%>
+        
+        
+        <!--show success-->
+        <%try{
+          
+        if (session.getAttribute("success")!=null){%>
+            <br>
+            <label class="label_ok" style="text-align:center;"><%String error =(String)session.getAttribute("success"); session.removeAttribute("success"); out.print(error);%> </label>
+        <%}
+        }catch(Exception e){
+        }%>
+        
+        
+        <input style="margin-top:20px;" type="password" name="current_pass" placeholder="Current Password" required="required" autofocus="true"/>
+        <input style="margin-top:10px;" type="password" name="new_pass" placeholder="New Password" required="required"/>
+        <input style="margin-top:10px;" type="password" name="confirm_pass" placeholder="Confirm Password" required="required" />
+        <button style="margin-top:20px;" type="submit" value="ChangePassword" class="btn btn-primary btn-block btn-large">Change Password</button>
+        
+    </form>
+    <!--</div>-->
+</div>
+        
 <!-- End Page Content -->
 </div>
 

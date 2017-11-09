@@ -73,24 +73,74 @@ body {font-family: "Lato", sans-serif}
  
 </div>
   
+  
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
+    
     <div class ="login">
-<form method ="post" action="putMarks">
-    <h2>Interviewer :</h2> 
-    <h2>Input marks for Applicant :<% out.println(session.getAttribute("applicant")); %></h2>
-  Questionare marks :<br>
-  <input type="text" name="mark1">
+<form method ="post" action="searchApplicant">
+    <h2>Search by Applicant ID</h2>
+    <%try{
+        if (session.getAttribute("error")!=null){%>  
+        <br><br>
+            <center> <label class="label_error" style="padding-left:55px;padding-right: 55px;"><%String error =(String)session.getAttribute("error");
+            session.removeAttribute("error"); out.print(error);%> </label></center> 
+        <%}
+        }catch(Exception e){
+        }%>
+        
+    
   <br>
-  Other Marks :<br>
-  <input type="text" name="mark2">
+  <input type="text" name="applicant_id">
+  
+  
   <br><br>
-  <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+  <button type="submit" class="btn btn-primary btn-block btn-large">Search</button>
 </form>     
     </div>
   
 <!-- End Page Content -->
 </div>
 
+
+
+<script>
+// Automatic Slideshow - change image every 4 seconds
+var myIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1;}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 4000);    
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") === -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+var modal = document.getElementById('ticketModal');
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
 </body>
 </html>
+
+

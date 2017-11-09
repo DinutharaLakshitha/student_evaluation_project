@@ -9,7 +9,6 @@ package attr;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 /**
  *
  * @author Dinuthara
@@ -17,53 +16,81 @@ import java.util.regex.Pattern;
 public class Validation {
     
     public boolean onlyLettersSpaces(String s){
-        for(int i=0;i<s.length();i++){
-          char ch = s.charAt(i);
-          if (Character.isLetter(ch) || ch == ' ') {
-            continue;
-          }
-          return false;
-        }
-        return true;
+  for(int i=0;i<s.length();i++){
+    char ch = s.charAt(i);
+    if (Character.isLetter(ch) || ch == ' ') {
+      continue;
     }
+    return false;
+  }
+  return true;
+}
     
-    public  boolean addressValidation(String address) {
-        String regex;
-        regex = "^[a-zA-Z0-9.-/s]+$";
-        String pattern = null;
-        Pattern r = Pattern.compile(pattern); 
-        Matcher m = r.matcher(address);
-
-        if(m.find()) {
-         return true;
-        } else {
-         return false;
-        }
-    }
+ public  boolean addressValidation(String address) {
+String regex;
+regex = "^[a-zA-Z0-9.-/s]+$";
+String pattern = null;
+Pattern r = Pattern.compile(pattern); 
+Matcher m = r.matcher(address);
  
-    public boolean onlyLettersSpacesdot(String s){
-        for(int i=0;i<s.length();i++){
-        char ch = s.charAt(i);
-        if (Character.isLetter(ch) || ch == ' ' || ch =='.') {
-         continue;
-        }
-        return false;
-        }
-        return true;
+if(m.find()) {
+ return true;
+} else {
+ return false;
+}
+}
+ 
+     public boolean onlyLettersSpacesdot(String s){
+  for(int i=0;i<s.length();i++){
+    char ch = s.charAt(i);
+    if (Character.isLetter(ch) || ch == ' ' || ch =='.') {
+      continue;
     }
+    return false;
+  }
+  return true;
+}
      
-    public boolean onlyInitials(String s){
-        for(int i=0;i<s.length();i++){
-        char ch = s.charAt(i);
-        if (Character.isUpperCase(ch) || ch =='.') {
-        continue;
-        }
-        return false;
-        }
-        return true;
+          public boolean onlyInitials(String s){
+  for(int i=0;i<s.length();i++){
+    char ch = s.charAt(i);
+    if (Character.isUpperCase(ch) || ch =='.') {
+      continue;
     }
-    
-    private Pattern pattern;
+    return false;
+  }
+  return true;
+}
+              public boolean onlyLetters(String s){
+  for(int i=0;i<s.length();i++){
+    char ch = s.charAt(i);
+    if (Character.isLetter(ch)) {
+      continue;
+    }
+    return false;
+  }
+  return true;
+}
+              public  boolean isNumeric(String str)
+{
+    for (char c : str.toCharArray())
+    {
+        if (!Character.isDigit(c)) return false;
+    }
+    return true;
+}
+                public boolean onlyLettersSpacesslash(String s){
+  for(int i=0;i<s.length();i++){
+    char ch = s.charAt(i);
+    if (Character.isLetter(ch) || ch == '/' || Character.isDigit(ch)) {
+      continue;
+    }
+    return false;
+  }
+  return true;
+}
+ 
+                private Pattern pattern;
     private Matcher matcher;
     private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
     /**
@@ -77,6 +104,4 @@ public class Validation {
             return matcher.matches();
 
     }
-    
-    
 }

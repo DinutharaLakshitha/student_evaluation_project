@@ -80,12 +80,13 @@ public class addApplicant extends HttpServlet {
             if(valid.onlyLettersSpaces(grama)== false){error.add("Invalid Grama Niladari Area");}
             if(valid.onlyInitials(initial)== false){error.add("Invalid Initials");}
             if(valid.onlyLettersSpacesdot(street_name)==false){error.add("Invalid Street Name");}
-            if(b_day == "Date"){error.add("Input a date");}
-            if(b_month == "Month"){error.add("Input a month");}
+            if(valid.onlyLettersSpacesslash(h_num) == false){error.add("Invalid home number");}
+            if(b_day.equals("NO")){error.add("Input a date");}
+            if(b_month.equals("NO")){error.add("Input a month");}
             
             int year = Calendar.getInstance().get(Calendar.YEAR);
             
-            if(b_month == "01"){year-=4;}
+            if(b_month.equals("NO")){year-=4;}
             else{year-=5;}
             
             String Year = Integer.toString(year);
@@ -104,6 +105,7 @@ public class addApplicant extends HttpServlet {
             
                 boolean a = applicant.register(f_name, l_name,initial, gender, dob, h_num, street_name, city_name,district,grama,gender,religeon);
                 out.println(a);
+                response.sendRedirect("addParent.jsp");
             }
             }
             
