@@ -77,7 +77,7 @@ body {font-family: "Lato", sans-serif}
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
 
-    <h1>Test commit 2</h1>
+    <p>test test test</p>
   
 <!-- End Page Content -->
 </div>
