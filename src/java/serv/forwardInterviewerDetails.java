@@ -7,24 +7,19 @@ package serv;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import utill.DbConnector;
 
 /**
  *
  * @author chathuranga
  */
-@WebServlet(name = "searchApplicant", urlPatterns = {"/searchApplicant"})
-public class searchApplicant extends HttpServlet {
+@WebServlet(name = "forwardInterviewerDetails", urlPatterns = {"/forwardInterviewerDetails"})
+public class forwardInterviewerDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,34 +36,8 @@ public class searchApplicant extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             /* TODO output your page here. You may use following sample code. */
-            try {
-                DbConnector db = new DbConnector();
-                Connection con = db.getCon();
-                Statement stmt;
-                String applicant_id = request.getParameter("applicant_id");
-                out.println(applicant_id);
-                stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("select * from applicant where applicant_id = '" + applicant_id + "'");
-                if (rs.next()) {
-                    DbConnector db1 = new DbConnector();
-                    Connection con1 = db1.getCon();
-                    
-                    Statement stmt1 = con1.createStatement();
-                    out.println("here");
-                    ResultSet rs1 = stmt1.executeQuery("select applicant_school.school_id, school.name from applicant_school,school where applicant_id = '" + applicant_id + "' and applicant_school.school_id = school.school_id");
-                    
-                    session.setAttribute("resultset", rs1);
-                    String applicant = rs.getString("first_name");
-                    session.setAttribute("applicant_id", applicant_id);
-                    session.setAttribute("applicant", applicant);
-                    response.sendRedirect("interviewStudent.jsp");
-                } else {
-                    session.setAttribute("error", "Not found");
-                    response.sendRedirect("interviewStudent.jsp");
-                }
-
-            } catch (SQLException ex) {
-            }
+            session.setAttribute("school", request.getParameter("school"));
+            response.sendRedirect("inputMarks.jsp");
         }
     }
 

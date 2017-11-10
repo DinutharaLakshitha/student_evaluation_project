@@ -77,15 +77,20 @@ body {font-family: "Lato", sans-serif}
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
     <div class ="login">
 <form method ="post" action="putMarks">
-    <h2>Interviewer :</h2> 
+    <h2>Interviewer : <% out.println(session.getAttribute("uname")); %></h2>
+    <h2>School : <% out.println(session.getAttribute("school")); %></h2>
     <h2>Input marks for Applicant :<% out.println(session.getAttribute("applicant")); %></h2>
   Questionare marks :<br>
   <input type="text" name="mark1">
   <br>
   Other Marks :<br>
   <input type="text" name="mark2">
+  <br>
+  Marks for distance:
+  <br>
+  <input type="text" name="txtDistance" value="mark_dist" disabled="disabled" />
   <br><br>
-  <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+  <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>  
 </form>     
     </div>
   
