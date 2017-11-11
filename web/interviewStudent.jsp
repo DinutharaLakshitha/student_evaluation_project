@@ -80,6 +80,7 @@
 
             <div class ="login">
                 <form method ="post" action="searchApplicant">
+                    <%if(session.getAttribute("success")!=null){%><label class="label_ok"> Successfully Entered </label><br><br><%}%>
                     <h2>Search by Applicant ID</h2>
                     <%try {
                             if (session.getAttribute("error") != null) {%>  
@@ -100,12 +101,14 @@
                     <h2>Select School</h2>
                     <br>
                     <select class="select" name="school">
-                        <%  while (resultset.next()) {%>
-                        <option><%= resultset.getString("name")%></option>
+                        <%  while(resultset.next()){ %>
+                        <option><%=resultset.getString("name")%></option>
+                    
+                    <%}}%>
                     </select>
                     <br><br>
                     <button type="submit" class="btn btn-primary btn-block btn-large" onclick="form.action = 'forwardInterviewerDetails'"> Start Interview </button>
-                    <%}}%>
+                    
                 </form> 
             </div>
 

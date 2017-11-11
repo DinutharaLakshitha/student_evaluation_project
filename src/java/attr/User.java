@@ -164,28 +164,7 @@ public class User {
         return encrypted_password;
     }
     
-    public String putMarks(String u_id, String app_id, int mark) throws IOException, ParseException {
-
-        try {
-            DbConnector db = new DbConnector();
-            Connection con = db.getCon();
-            Statement stmt;
-
-            Date date = new Date();
-            int dd = date.getDate();
-            int mm = date.getMonth();
-            int yy = date.getYear() + 1990;
-            String dt = yy + "-" + mm + "-" + dd;
-
-            stmt = con.createStatement();
-            //rs = stmt.executeQuery("select * from interview");
-            stmt.executeUpdate("insert into interview values('" + u_id + "','" + app_id + "','" + mark + "','" + dt + "')");
-
-        } catch (SQLException ex) {
-            return "error";
-        }
-        return "success";
-    }
+    
 
 //
 //    public String putMarks(String u_id, String appid, int mark) {
