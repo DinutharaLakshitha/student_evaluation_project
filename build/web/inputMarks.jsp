@@ -77,15 +77,28 @@ body {font-family: "Lato", sans-serif}
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
     <div class ="login">
 <form method ="post" action="putMarks">
-    <h2>Interviewer :</h2> 
-    <h2>Input marks for Applicant :<% out.println(session.getAttribute("applicant")); %></h2>
-  Questionare marks :<br>
-  <input type="text" name="mark1">
+    <Text>Interviewer : <% out.println(session.getAttribute("uname")); %></Text>
+    <br>
+    <Text>School : <% out.println(session.getAttribute("school")); %></Text>
+    <br>
+    <Text>Input marks for Applicant :<% out.println(session.getAttribute("applicant")); %></Text>
+    <br>
+    <Text> School id : <% out.println(session.getAttribute("school_id")); %></Text>
+    <br>
+    <% float dist_mark =  (float)(session.getAttribute("dist_mark")); %>
+    
+  <br>
+    Questionare marks :<br>
+  <input type="text" value ="0" name="mark1">
   <br>
   Other Marks :<br>
-  <input type="text" name="mark2">
+  <input type="text" value="0" name="mark2">
+  <br>
+  Marks for distance:
+  <br>
+  <input type="text" name="txtDistance" value="<%out.println(dist_mark);%>" disabled="disabled" />
   <br><br>
-  <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+  <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>  
 </form>     
     </div>
   

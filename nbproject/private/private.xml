@@ -2,23 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/web/home.jsp</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/src/java/serv/Login.java</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/src/java/attr/User.java</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/src/java/serv/Register.java</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/src/java/utill/DbConnector.java</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/src/java/serv/Logout.java</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/web/css/style_index.css</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/web/addApplicant.jsp</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/web/interviewStudent.jsp</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/web/viewProfile.jsp</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/src/java/serv/Home.java</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/web/registerUser.jsp</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/web/changePassword.jsp</file>
-            <file>file:/C:/Users/rajitha/Documents/NetBeansProjects/Database_Project/web/index.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

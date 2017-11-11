@@ -77,7 +77,8 @@ body {font-family: "Lato", sans-serif}
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
 
-  
+    <p>test test test</p>
+    <p>test test test</p>
   
 <!-- End Page Content -->
 </div>

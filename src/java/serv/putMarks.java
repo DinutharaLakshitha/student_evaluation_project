@@ -5,6 +5,7 @@
  */
 package serv;
 
+import attr.Interview;
 import attr.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,22 +49,29 @@ public class putMarks extends HttpServlet {
             
             int mark1 = Integer.parseInt(request.getParameter("mark1"));
             int mark2 = Integer.parseInt(request.getParameter("mark2"));
+            float mark3 = (float)(session.getAttribute("dist_mark"));
             
-            int mark = mark1 + mark2;
+            float mark = mark1 + mark2 + mark3;
+            
             String appid = (String)session.getAttribute("applicant_id");
             String u_name = (String)session.getAttribute("uname");
+            String school_id = (String)session.getAttribute("school_id");
             String u_id = "";
+            
             User uu = new User();
             ResultSet rs = uu.getDetails(u_name);
             if(rs.next()){
                 u_id = rs.getString("user_id");
             }
 
+            Interview obj = new Interview();
             
-            String attempt = uu.putMarks(u_id, appid, mark);
+            String attempt = obj.putMarks(u_id, appid,school_id, mark);
             out.println("<p>");
             out.println(attempt);
             out.println("</p>");
+            session.setAttribute("success", true);
+            response.sendRedirect("interviewStudent.jsp");
             /*
              boolean attempt = uu.putMarks();
              if(attempt){

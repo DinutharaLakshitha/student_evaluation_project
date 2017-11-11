@@ -5,26 +5,26 @@
  */
 package serv;
 
+import attr.Interview;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import utill.DbConnector;
 
 /**
  *
  * @author chathuranga
  */
-@WebServlet(name = "searchApplicant", urlPatterns = {"/searchApplicant"})
-public class searchApplicant extends HttpServlet {
+@WebServlet(name = "forwardInterviewerDetails", urlPatterns = {"/forwardInterviewerDetails"})
+public class forwardInterviewerDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,39 +36,24 @@ public class searchApplicant extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             /* TODO output your page here. You may use following sample code. */
-            try {
-                DbConnector db = new DbConnector();
-                Connection con = db.getCon();
-                Statement stmt;
-                String applicant_id = request.getParameter("applicant_id");
-                out.println(applicant_id);
-                stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("select * from applicant where applicant_id = '" + applicant_id + "'");
-                if (rs.next()) {
-                    DbConnector db1 = new DbConnector();
-                    Connection con1 = db1.getCon();
-                    
-                    Statement stmt1 = con1.createStatement();
-                    out.println("here");
-                    ResultSet rs1 = stmt1.executeQuery("select applicant_school.school_id, school.name from applicant_school,school where applicant_id = '" + applicant_id + "' and applicant_school.school_id = school.school_id");
-                    
-                    session.setAttribute("resultset", rs1);
-                    String applicant = rs.getString("first_name");
-                    session.setAttribute("applicant_id", applicant_id);
-                    session.setAttribute("applicant", applicant);
-                    response.sendRedirect("interviewStudent.jsp");
-                } else {
-                    session.setAttribute("error", "Not found");
-                    response.sendRedirect("interviewStudent.jsp");
-                }
-
-            } catch (SQLException ex) {
-            }
+            String school = request.getParameter("school");
+            String applicant_id = (String) session.getAttribute("applicant_id");
+            
+            Interview obj = new Interview();
+            String school_id = obj.getSchoolId(school);
+            float dist_mark = (float)obj.getDistanceMarks(applicant_id,school_id);
+            
+            
+            session.setAttribute("school", school);
+            session.setAttribute("dist_mark", dist_mark);
+            session.setAttribute("school_id", school_id);
+            
+            response.sendRedirect("inputMarks.jsp");
         }
     }
 
@@ -84,7 +69,11 @@ public class searchApplicant extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(forwardInterviewerDetails.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -98,7 +87,11 @@ public class searchApplicant extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(forwardInterviewerDetails.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
