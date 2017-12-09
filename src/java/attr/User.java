@@ -36,6 +36,7 @@ public class User {
             Statement stmt;
           
             stmt = con.createStatement();
+            //SQL injection to be implemented
             //rs = stmt.executeQuery("select user_name,password,occupation from interviewer where user_name = '"+uname+"' and password = '"+password+"'");
             rs = stmt.executeQuery("select user_name,pass,role_name from user join ((select user_id,role_name from user_role join role on user_role.role_id=role.role_id) as r) using (user_id) where user_name='"+uname+"' and pass='"+password+"'");
             
