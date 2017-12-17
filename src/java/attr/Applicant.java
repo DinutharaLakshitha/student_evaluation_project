@@ -25,38 +25,30 @@ import utill.DbConnector;
  * @author Dinuthara
  */
 public class Applicant {
+    String f_name,l_name,initial;
+    String h_num,street_name,city_name,grama,district;
+    String dob;
+    String gender;
+    String religeon;
+                         
 
-    public boolean register(String f_name, String l_name, String initial, String gender0, String dob, String h_num, String street_name, String city_name, String district, String grama, String gender, String religeon) throws IOException, SQLException {
-        ResultSet rs = null;
-        boolean success = false;
-        try {
-            DbConnector db = new DbConnector();
-            Connection conn = db.getCon();
-
-            String rawString = "INSERT INTO applicant (`first_name`, `last_name`, `initials`, `dob`, `gender`, `religion`, `home_number`, `street_name`,`city`, `district`, `grama_niladari_div`) VALUES (?, ?, ?,?, ?,?,?, ?,?, ?, ?)";
-            PreparedStatement statement = conn.prepareStatement(rawString);
-            statement.setString(1, f_name);
-            statement.setString(2, l_name);
-            statement.setString(3, initial);
-            statement.setString(4, dob);
-            statement.setString(5, gender0);
-            statement.setString(6, religeon);
-            statement.setString(7, h_num);
-            statement.setString(8, street_name);
-            statement.setString(9, city_name);
-            statement.setString(10, district);
-            statement.setString(11, grama);
-            statement.executeUpdate();
-
-            success = true;
-
-        } catch (SQLException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
-
-        return success;
-
+    public Applicant(String f_name, String l_name, String initial, String h_num, String street_name, String city_name, String grama, String district,String dob, String gender, String religeon) {
+        this.f_name=f_name;
+        this.l_name=l_name;
+        this.initial=initial;
+        this.h_num=h_num;
+        this.street_name=street_name;
+        this.city_name=city_name;
+        this.grama=grama;
+        this.district=district;
+        this.dob=dob;
+        this.gender=gender;
+        this.religeon=religeon;
+        
+        
+        
     }
+    
 
+    
 }

@@ -17,26 +17,22 @@ import utill.DbConnector;
  * @author ANTIROOKIE
  */
 public class Parent {
-
-    public void StoreData(String NIC, String first_name, String last_name, String initials, String occupation, String gender, String tel_num) throws IOException, SQLException {
-        DbConnector dbConnection = new DbConnector();
-        Connection con = dbConnection.getCon();
-
-        String rawString = "INSERT INTO parent (NIC, first_name, last_name, initials, occupation, gender, tel_num) VALUE (?,?,?,?,?,?,?)";
-        PreparedStatement statement = con.prepareStatement(rawString);
-        statement.setString(1, NIC);
-        statement.setString(2, first_name);
-        statement.setString(3, last_name);
-        statement.setString(4, initials);
-        statement.setString(5, occupation);
-        statement.setString(6, gender);
-        statement.setString(7, tel_num);
-        statement.executeUpdate();
-
+    String NIC;
+    String first_name,last_name,initials;
+    String occupation;
+    String gender;
+    String tel_num;
+    
+    public Parent(String NIC, String first_name, String last_name, String initials, String occupation, String gender, String tel_num){
+        this.NIC=NIC;
+        this.first_name=first_name;
+        this.last_name=last_name;
+        this.initials=initials;
+        this.occupation=occupation;
+        this.tel_num=tel_num;
+        
     }
 
-    public void StoreData(String nic, String fName, String lName, String init, String occupation, String telephone, String gender, String lName0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
 }
