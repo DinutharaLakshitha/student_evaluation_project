@@ -5,7 +5,10 @@
  */
 package serv;
 
+import attr.Applicant;
 import attr.Parent;
+import attr.ParentChild;
+import attr.Validation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
@@ -45,6 +48,9 @@ public class addParent extends HttpServlet {
         error = new ArrayList<>();
         HttpSession session=request.getSession();
         session.setAttribute("Error", error);
+        
+        Applicant applicant=(Applicant) session.getAttribute("Applicant");
+      
         try (PrintWriter out = response.getWriter()) {
             String fName =request.getParameter("txt_fname");
             String lName =request.getParameter("txt_lname");
@@ -53,11 +59,42 @@ public class addParent extends HttpServlet {
             String gender=request.getParameter("txt_gender");
             String occupation =request.getParameter("txt_occupation");
             String telephone =request.getParameter("txt_telephone");
-            
-            Parent parent=new Parent();
-            parent.StoreData(nic, fName, lName, init, occupation, gender,telephone);
-            out.print(init);
-            response.sendRedirect("home.jsp");
+                       
+             Validation valid=new Validation();
+            out.print("hii 2");
+           if (!valid.onlyLetters(fName)){error.add("Invalid first name");}
+           out.print("hii 3");
+           if (!valid.onlyLetters(lName)){error.add("Invalid Last name");}
+           out.print("hii 4");
+           if (!valid.onlyInitials(init)){error.add("Invalid Initials Use capitals");}
+           out.print("hii 5");
+           if (!valid.NICValid(nic)){error.add("Invalid NIC Number");}
+           out.print("hii 6");
+           if (valid.GenderValid(gender)){error.add("Invalid Gender");}
+           out.print("hii 7");
+           if (!valid.onlyLetters(occupation)){error.add("Invalid Occcupation");}
+           out.print("hii 8");
+           if (!valid.TelValid(telephone)){error.add("Invalid Telephone Number");}
+           out.print("hii 9");
+           
+            if(error.size()>0){
+                response.sendRedirect("addParent.jsp");
+            }
+            else{ 
+                 out.print("hii 10");
+                Parent parent=new Parent( nic,  fName,  lName,  init,  occupation,  gender,  telephone);
+                out.print("hii 11");
+                ParentChild parentChild =new ParentChild();
+                parentChild.storeData(parent, applicant);
+                //response.sendRedirect("home.jsp");
+                
+                
+             
+               // parent.StoreData(nic, fName, lName, init, occupation, gender,telephone);
+                out.print("a");
+                //response.sendRedirect("home.jsp");
+                
+            }
             
         }
        

@@ -1,4 +1,6 @@
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"
+        import= "java.util.*"
+        import="attr.School"%>
 <%
     String occupation="none";
     try{
@@ -116,12 +118,29 @@ body {font-family: "Lato", sans-serif}
         <!--<input style="margin-top:20px;" type="text" name="uname" placeholder="Enter Username" required="required" autofocus="true"/>-->
         
         
-        <select class="select" style="margin-top:10px;" required="required" name="occupation">
+        <select onchange="checkInterViewer(this);" class="select" style="margin-top:10px;" required="required" name="occupation">
             <option value="null" >--Choose Occupation--</option>
             <option value="admin">Admin</option>
             <option value="dataEntry">Data Entry</option>
             <option value="interviewer">Interviewer</option>
         </select>
+        
+        <select id="select_school" class="select" style="margin-top:10px; display: none;" required="required" name="school">
+            <option value="null" >--Select School--</option>
+            <%
+                School school=new School();
+                HashMap hm=school.getSchoolDetails();
+                
+                Set set = hm.entrySet();
+      
+                Iterator i = set.iterator();
+                while(i.hasNext()) {
+                    Map.Entry me = (Map.Entry)i.next();%>
+                    <option value="<%out.print(me.getKey());%>" ><%out.print(me.getValue());%></option><%
+                }
+            %> 
+        </select>
+            
         
         <%try{
           
@@ -156,6 +175,16 @@ body {font-family: "Lato", sans-serif}
   
 <!-- End Page Content -->
 </div>
+        
+<script>
+    function checkInterViewer(that) {
+        if (that.value == "interviewer") {
+            document.getElementById("select_school").style.display = "block";
+        } else {
+            document.getElementById("select_school").style.display = "none";
+        }
+    }
+</script>
 
 
 

@@ -104,4 +104,36 @@ if(m.find()) {
             return matcher.matches();
 
     }
+    public  boolean NICValid(String NIC){
+         
+         if ((NIC.length()==10) && (NIC.charAt(9)=='v'|| NIC.charAt(9)=='V')){
+             
+             for (int i = 0; i < 8; i++) {
+                if (Character.isDigit(i) ){
+                     continue;
+                 }
+                 return false;
+                              
+                                               
+            }
+            return true;
+         }
+         return true;
+     }
+    public boolean TelValid(String tel){
+        if (tel.length()==10){
+            for (int i=0;i<10;i++){
+                 char ch=tel.charAt(i);
+                if (Character.isDigit(ch)){continue;}
+                return false;
+                        }
+            return true;
+            
+        }
+        return false;
+    }
+    public boolean GenderValid(String gender){
+        if (gender=="Male" | gender =="male" |gender=="Female" |gender =="female"){return true;}
+        return false;
+    }
 }

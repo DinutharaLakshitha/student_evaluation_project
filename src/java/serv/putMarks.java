@@ -71,6 +71,7 @@ public class putMarks extends HttpServlet {
             out.println(attempt);
             out.println("</p>");
             session.setAttribute("success", true);
+            
             response.sendRedirect("interviewStudent.jsp");
             /*
              boolean attempt = uu.putMarks();

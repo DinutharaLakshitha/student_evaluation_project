@@ -52,7 +52,7 @@ public class forwardInterviewerDetails extends HttpServlet {
             session.setAttribute("school", school);
             session.setAttribute("dist_mark", dist_mark);
             session.setAttribute("school_id", school_id);
-            
+            session.setAttribute("refList", obj.getReferences(applicant_id));
             response.sendRedirect("inputMarks.jsp");
         }
     }

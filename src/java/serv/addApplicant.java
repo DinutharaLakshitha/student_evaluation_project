@@ -6,6 +6,7 @@
 package serv;
 
 import attr.Applicant;
+import attr.ParentChild;
 import attr.Validation;
 import java.awt.List;
 import java.io.IOException;
@@ -46,8 +47,12 @@ public class addApplicant extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             ArrayList<String> error;
             error = new ArrayList<>();
+            ArrayList<String> applicantData;
+            applicantData=new ArrayList<>();
+            
             HttpSession session=request.getSession();
             session.setAttribute("Error", error);
+            session.setAttribute("applicantData", applicantData);
             
             
             
@@ -99,13 +104,20 @@ public class addApplicant extends HttpServlet {
                 response.sendRedirect("addApplicant.jsp");
             }
             else{ 
-                Applicant applicant = new Applicant();
+                //Applicant applicant = new Applicant();
             
                 out.println("Object created");
+                Applicant applicant=new Applicant(f_name, l_name, initial, h_num, street_name, city_name, grama, district, dob, gender, religeon);
+                session.setAttribute("Applicant", applicant);
+                
+                
+                
+                
             
-                boolean a = applicant.register(f_name, l_name,initial, gender, dob, h_num, street_name, city_name,district,grama,gender,religeon);
-                out.println(a);
+               // boolean a = applicant.register(f_name, l_name,initial, gender, dob, h_num, street_name, city_name,district,grama,gender,religeon);
+              //  out.println(a);
                 response.sendRedirect("addParent.jsp");
+               
             }
             }
             
