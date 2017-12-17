@@ -69,7 +69,7 @@ body {font-family: "Lato", sans-serif}
   <%}%>
   <% if (occupation.equals("interviewer")){%>
           <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large">INTERVIEW STUDENT</a>
-          <a href="forwardResults.java" class="w3-bar-item w3-button w3-padding-large">VIEW RESULTS</a>
+          <a href="forwardResults" class="w3-bar-item w3-button w3-padding-large">VIEW RESULTS</a>
   <%}%>
   <a href="Logout" class="w3-bar-item w3-button w3-padding-large">LOG OUT</a>
  

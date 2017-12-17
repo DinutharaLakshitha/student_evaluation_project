@@ -37,44 +37,48 @@
     </style>
     <body>
 
-        <!-- Navbar -->
-        <div class="w3-top">
-            <div class="w3-bar w3-black w3-card">
-                <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-                <a href="home.jsp" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-                <a href="ViewProfile" class="w3-bar-item w3-button w3-padding-large w3-hide-small">VIEW PROFILE</a>
-                <a href="changePassword.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CHANGE PASSWORD</a>
-                <% if (occupation.equals("admin")) {%>
-                <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ADD USER</a>
-                <%}%>
-                <% if (occupation.equals("dataEntry")) {%>
-                <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ADD APPLICANT</a>
-                <%}%>
-                <% if (occupation.equals("interviewer")) {%>
-                <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-orange">INTERVIEW STUDENT</a>
-                <%}%>
-                <a href="Logout" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">LOG OUT</a>
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-black w3-card">
+        <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <a href="home.jsp" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+        <a href="ViewProfile" class="w3-bar-item w3-button w3-padding-large w3-hide-small">VIEW PROFILE</a>
+        <a href="changePassword.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CHANGE PASSWORD</a>
+        <% if (occupation.equals("admin")) {%>
+        <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ADD USER</a>
+        <%}%>
+        <% if (occupation.equals("dataEntry")) {%>
+        <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ADD APPLICANT</a>
+        <a href="addSchool.jsp" class="w3-bar-item w3-button w3-padding-large">ADD SCHOOL</a>
+        <%}%>
+        <% if (occupation.equals("interviewer")){%>
+  <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large w3-orange">INTERVIEW STUDENT</a>
+  <a href="forwardResults" class="w3-bar-item w3-button w3-padding-large">VIEW RESULTS</a>
+<%}%>
+        <a href="Logout" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">LOG OUT</a>
 
 
-            </div>
-        </div>
+    </div>
+</div>
 
-        <!-- Navbar on small screens -->
-        <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-            <a href="ViewProfile" class="w3-bar-item w3-button w3-padding-large">VIEW PROFILE</a>
-            <a href="changePassword.jsp" class="w3-bar-item w3-button w3-padding-large">CHANGE PASSWORD</a>
-            <% if (occupation.equals("admin")) {%>
-            <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large">ADD USER</a>
-            <%}%>
-            <% if (occupation.equals("dataEntry")) {%>
-            <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large">ADD APPLICANT</a>
-            <%}%>
-            <% if (occupation.equals("interviewer")) {%>
-            <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large w3-orange">INTERVIEW STUDENT</a>
-            <%}%>
-            <a href="Logout" class="w3-bar-item w3-button w3-padding-large">LOG OUT</a>
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+    <a href="ViewProfile" class="w3-bar-item w3-button w3-padding-large">VIEW PROFILE</a>
+    <a href="changePassword.jsp" class="w3-bar-item w3-button w3-padding-large">CHANGE PASSWORD</a>
+    <% if (occupation.equals("admin")) {%>
+    <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large">ADD USER</a>
+    <%}%>
+    <% if (occupation.equals("dataEntry")) {%>
+    <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large">ADD APPLICANT</a>
+    <a href="addSchool.jsp" class="w3-bar-item w3-button w3-padding-large">ADD SCHOOL</a>
+    <%}%>
+    <% if (occupation.equals("interviewer")){%>
+  <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large w3-orange">INTERVIEW STUDENT</a>
+  <a href="forwardResults" class="w3-bar-item w3-button w3-padding-large">VIEW RESULTS</a>
+<%}%>
+    <a href="Logout" class="w3-bar-item w3-button w3-padding-large">LOG OUT</a>
 
-        </div>
+</div>
 
         <!-- Page content -->
         <div class="w3-content" style="max-width:2000px;margin-top:46px">

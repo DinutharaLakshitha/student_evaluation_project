@@ -14,6 +14,9 @@
         }
         else{
             occupation=(String)session.getAttribute("occupation");
+            if (!occupation.equals("dataEntry")) {
+                response.sendRedirect("index.jsp");
+            }
         }
     }catch(Exception e){
     }
@@ -48,15 +51,16 @@ body {font-family: "Lato", sans-serif}
     <a href="ViewProfile" class="w3-bar-item w3-button w3-padding-large w3-hide-small">VIEW PROFILE</a>
     <a href="changePassword.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CHANGE PASSWORD</a>
     <% if (occupation.equals("admin")){%>
-          <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-orange">ADD USER</a>
+          <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ADD USER</a>
     <%}%>
     <% if (occupation.equals("dataEntry")){%>
           <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ADD APPLICANT</a>
           <a href="addSchool.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-orange">ADD SCHOOL</a>
     <%}%>
     <% if (occupation.equals("interviewer")){%>
-          <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">INTERVIEW STUDENT</a>
-    <%}%>
+          <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large">INTERVIEW STUDENT</a>
+          <a href="forwardResults" class="w3-bar-item w3-button w3-padding-large">VIEW RESULTS</a>
+  <%}%>
     <a href="Logout" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">LOG OUT</a>
     
       
@@ -68,13 +72,15 @@ body {font-family: "Lato", sans-serif}
   <a href="ViewProfile" class="w3-bar-item w3-button w3-padding-large">VIEW PROFILE</a>
   <a href="changePassword.jsp" class="w3-bar-item w3-button w3-padding-large">CHANGE PASSWORD</a>
   <% if (occupation.equals("admin")){%>
-          <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large w3-orange">ADD USER</a>
+          <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large">ADD USER</a>
   <%}%>
   <% if (occupation.equals("dataEntry")){%>
           <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large">ADD APPLICANT</a>
+          <a href="addSchool.jsp" class="w3-bar-item w3-button w3-padding-large w3-orange">ADD SCHOOL</a>
   <%}%>
   <% if (occupation.equals("interviewer")){%>
           <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large">INTERVIEW STUDENT</a>
+          <a href="forwardResults" class="w3-bar-item w3-button w3-padding-large">VIEW RESULTS</a>
   <%}%>
   <a href="Logout" class="w3-bar-item w3-button w3-padding-large">LOG OUT</a>
  

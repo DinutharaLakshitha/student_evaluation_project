@@ -1,4 +1,6 @@
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"
+        import= "java.util.*"
+        import="attr.School"%>
 <%
     String occupation=null;
     try{
@@ -8,6 +10,9 @@
         }
         else{
             occupation=(String)session.getAttribute("occupation");
+            if (!occupation.equals("dataEntry")) {
+                response.sendRedirect("index.jsp");
+            }
         }
     }catch(Exception e){
     }
@@ -42,15 +47,16 @@ body {font-family: "Lato", sans-serif}
     <a href="ViewProfile" class="w3-bar-item w3-button w3-padding-large w3-hide-small">VIEW PROFILE</a>
     <a href="changePassword.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CHANGE PASSWORD</a>
     <% if (occupation.equals("admin")){%>
-          <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-orange">ADD USER</a>
+          <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ADD USER</a>
     <%}%>
     <% if (occupation.equals("dataEntry")){%>
           <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-orange">ADD APPLICANT</a>
           <a href="addSchool.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ADD SCHOOL</a>
     <%}%>
     <% if (occupation.equals("interviewer")){%>
-          <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">INTERVIEW STUDENT</a>
-    <%}%>
+          <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large">INTERVIEW STUDENT</a>
+          <a href="forwardResults" class="w3-bar-item w3-button w3-padding-large">VIEW RESULTS</a>
+  <%}%>
     <a href="Logout" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">LOG OUT</a>
     
       
@@ -62,13 +68,15 @@ body {font-family: "Lato", sans-serif}
   <a href="ViewProfile" class="w3-bar-item w3-button w3-padding-large">VIEW PROFILE</a>
   <a href="changePassword.jsp" class="w3-bar-item w3-button w3-padding-large">CHANGE PASSWORD</a>
   <% if (occupation.equals("admin")){%>
-          <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large w3-orange">ADD USER</a>
+          <a href="registerUser.jsp" class="w3-bar-item w3-button w3-padding-large">ADD USER</a>
   <%}%>
   <% if (occupation.equals("dataEntry")){%>
           <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large w3-orange">ADD APPLICANT</a>
+          <a href="addSchool.jsp" class="w3-bar-item w3-button w3-padding-large">ADD SCHOOL</a>
   <%}%>
   <% if (occupation.equals("interviewer")){%>
           <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large">INTERVIEW STUDENT</a>
+          <a href="forwardResults" class="w3-bar-item w3-button w3-padding-large">VIEW RESULTS</a>
   <%}%>
   <a href="Logout" class="w3-bar-item w3-button w3-padding-large">LOG OUT</a>
  
@@ -79,8 +87,8 @@ body {font-family: "Lato", sans-serif}
 
     
     <div class="login">
-	
-             <form method="post" action="addApplicant" id="asd">
+	<h1>Add Applicant</h1>
+    <form method="post" action="addApplicant">
         <%try{
         
         ArrayList error =(ArrayList)session.getAttribute("Error");
@@ -90,7 +98,16 @@ body {font-family: "Lato", sans-serif}
         <%}
         }catch(Exception e){
         }%>
-        <h1>Add Applicant</h1>
+        
+        <!--show success-->
+        <%try{
+          
+        if (session.getAttribute("success")!=null){%>
+        <label class="label_ok" style="text-align:center;"><%String error =(String)session.getAttribute("success"); session.removeAttribute("success"); out.print(error);%> </label><br>
+        <%}
+        }catch(Exception e){
+        }%>
+        
         <h4 style="color:blue;" >NAME</h4>
         <input type="text"  name="txt_fname" placeholder="First Name" required="required"  />
         <input type="text"  name="txt_lname" placeholder="Last Name" required="required" />
@@ -117,7 +134,7 @@ body {font-family: "Lato", sans-serif}
 
 
                 </select>
-        <select class="select" name="month" >
+                <select class="select" name="month" >
                   <option value="NO">Month</option>
                   <option value="01">jan</option>
                   <option value="02">feb</option>
@@ -146,6 +163,26 @@ body {font-family: "Lato", sans-serif}
                   <option value="islam">Islam</option>
                 </select>
               
+                <h4 style="color:blue;" >SCHOOL</h4>
+                <select class="select" required="required" name="school">
+                    <option value="null" >--Select School--</option>
+                    <%
+                        School school=new School();
+                        HashMap hm=school.getSchoolDetails();
+
+                        Set set = hm.entrySet();
+
+                        Iterator i = set.iterator();
+                        while(i.hasNext()) {
+                            Map.Entry me = (Map.Entry)i.next();%>
+                            <option value="<%out.print(me.getKey());%>" ><%out.print(me.getValue());%></option><%
+                        }
+                    %> 
+                </select>
+                
+                <h4 style="color:blue;" >DISTANCE</h4>
+                <input type="number" min="0"  name="distance" placeholder="Distance" required="required"  />
+                
             <button style="margin-top:20px;" type="submit" value="addApplicant" class="btn btn-primary btn-block btn-large">Add Applicant</button>
     </form>
 </div>
@@ -153,8 +190,6 @@ body {font-family: "Lato", sans-serif}
   
 <!-- End Page Content -->
 </div>
-        
-
 
 
 

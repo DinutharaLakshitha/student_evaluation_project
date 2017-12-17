@@ -6,7 +6,6 @@
 package serv;
 
 import attr.Applicant;
-import attr.ParentChild;
 import attr.Validation;
 import java.awt.List;
 import java.io.IOException;
@@ -47,12 +46,8 @@ public class addApplicant extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             ArrayList<String> error;
             error = new ArrayList<>();
-            ArrayList<String> applicantData;
-            applicantData=new ArrayList<>();
-            
             HttpSession session=request.getSession();
             session.setAttribute("Error", error);
-            session.setAttribute("applicantData", applicantData);
             
             
             
@@ -76,6 +71,9 @@ public class addApplicant extends HttpServlet {
             String gender = request.getParameter("gender");
             String religeon = request.getParameter("religion");
             
+            String school=request.getParameter("school");
+            String distance=request.getParameter("distance");
+            
             Validation valid = new Validation();
             
             if(valid.onlyLettersSpaces(f_name)== false){error.add("Invalid First Name");}
@@ -88,6 +86,14 @@ public class addApplicant extends HttpServlet {
             if(valid.onlyLettersSpacesslash(h_num) == false){error.add("Invalid home number");}
             if(b_day.equals("NO")){error.add("Input a date");}
             if(b_month.equals("NO")){error.add("Input a month");}
+            
+            if(school.equals("null")){
+                error.add("Please select school.");
+            }
+            
+            if(distance.equals("0")){
+                error.add("Distance should be greater than zero.");
+            }
             
             int year = Calendar.getInstance().get(Calendar.YEAR);
             
@@ -104,20 +110,9 @@ public class addApplicant extends HttpServlet {
                 response.sendRedirect("addApplicant.jsp");
             }
             else{ 
-                //Applicant applicant = new Applicant();
-            
-                out.println("Object created");
                 Applicant applicant=new Applicant(f_name, l_name, initial, h_num, street_name, city_name, grama, district, dob, gender, religeon);
                 session.setAttribute("Applicant", applicant);
-                
-                
-                
-                
-            
-               // boolean a = applicant.register(f_name, l_name,initial, gender, dob, h_num, street_name, city_name,district,grama,gender,religeon);
-              //  out.println(a);
                 response.sendRedirect("addParent.jsp");
-               
             }
             }
             

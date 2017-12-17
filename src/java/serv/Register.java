@@ -111,9 +111,7 @@ public class Register extends HttpServlet {
                         if (success){
                             session.setAttribute("success","User "+name+" successfully added.");
                         }else{
-                            u.deleteUser(name);
                             error.add("Error occured while adding user.");
-                            //session.setAttribute("error","Error occured while adding user.");
                         }
                         response.sendRedirect("registerUser.jsp");
                     }

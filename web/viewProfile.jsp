@@ -44,10 +44,12 @@ body {font-family: "Lato", sans-serif}
     <%}%>
     <% if (occupation.equals("dataEntry")){%>
           <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ADD APPLICANT</a>
+          <a href="addSchool.jsp" class="w3-bar-item w3-button w3-padding-large">ADD SCHOOL</a>
     <%}%>
     <% if (occupation.equals("interviewer")){%>
-          <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large w3-hide-small">INTERVIEW STUDENT</a>
-    <%}%>
+          <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large">INTERVIEW STUDENT</a>
+          <a href="forwardResults" class="w3-bar-item w3-button w3-padding-large">VIEW RESULTS</a>
+  <%}%>
     <a href="Logout" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">LOG OUT</a>
     
       
@@ -63,9 +65,11 @@ body {font-family: "Lato", sans-serif}
   <%}%>
   <% if (occupation.equals("dataEntry")){%>
           <a href="addApplicant.jsp" class="w3-bar-item w3-button w3-padding-large">ADD APPLICANT</a>
+          <a href="addSchool.jsp" class="w3-bar-item w3-button w3-padding-large">ADD SCHOOL</a>
   <%}%>
   <% if (occupation.equals("interviewer")){%>
           <a href="interviewStudent.jsp" class="w3-bar-item w3-button w3-padding-large">INTERVIEW STUDENT</a>
+          <a href="forwardResults" class="w3-bar-item w3-button w3-padding-large">VIEW RESULTS</a>
   <%}%>
   <a href="Logout" class="w3-bar-item w3-button w3-padding-large">LOG OUT</a>
  
