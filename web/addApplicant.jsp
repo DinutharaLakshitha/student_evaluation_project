@@ -79,8 +79,8 @@ body {font-family: "Lato", sans-serif}
 
     
     <div class="login">
-	<h1>Add Applicant</h1>
-    <form method="post" action="addApplicant">
+	
+             <form method="post" action="addApplicant" id="asd">
         <%try{
         
         ArrayList error =(ArrayList)session.getAttribute("Error");
@@ -90,7 +90,7 @@ body {font-family: "Lato", sans-serif}
         <%}
         }catch(Exception e){
         }%>
-        
+        <h1>Add Applicant</h1>
         <h4 style="color:blue;" >NAME</h4>
         <input type="text"  name="txt_fname" placeholder="First Name" required="required"  />
         <input type="text"  name="txt_lname" placeholder="Last Name" required="required" />
@@ -153,6 +153,8 @@ body {font-family: "Lato", sans-serif}
   
 <!-- End Page Content -->
 </div>
+        
+
 
 
 
