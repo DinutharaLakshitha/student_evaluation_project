@@ -5,6 +5,7 @@
  */
 package serv;
 
+import attr.Interviewer;
 import attr.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -60,6 +61,7 @@ public class Register extends HttpServlet {
                     String email = request.getParameter("email");
                     String pass = request.getParameter("pass");
                     String confirm_pass = request.getParameter("confirm_pass");
+                    String school=null;
                     
                     User u =new User();
                     
@@ -70,13 +72,17 @@ public class Register extends HttpServlet {
                     
                     if (occupation.equals("null")){
                         error.add("Please select occupation.");
+                    }else if(occupation.equals("interviewer")){
+                        school = request.getParameter("school");
+                        if (school.equals("null")){
+                            error.add("Please select school.");
+                        }
                     }
                     
                     if (tel.length()!=10){
                         error.add("Invalid contact number.");
                     }
                     
-//                    if (email validate)
                     
                     if (pass.length()<6){
                         error.add("Password too short.");
@@ -93,7 +99,13 @@ public class Register extends HttpServlet {
                         session.setAttribute("email",email);
                         response.sendRedirect("registerUser.jsp");
                     }else{
-                        boolean success= u.registerUser(name,occupation,tel,pass,email);
+                        boolean success=false;
+                        if (occupation.equals("interviewer")){
+                            Interviewer interviewer=new Interviewer();
+                            success= interviewer.registerInterviewer(name,occupation,tel,pass,email,school);
+                        }else{
+                            success= u.registerUser(name,occupation,tel,pass,email);
+                        }
                         
                         out.println(success);
                         if (success){

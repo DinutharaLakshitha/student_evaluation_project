@@ -32,7 +32,7 @@
 body {font-family: "Lato", sans-serif}
 .mySlides {display: none}
 </style>
-<body><!hbh>
+<body>
 
 <!-- Navbar -->
 <div class="w3-top">

@@ -97,7 +97,7 @@ public class User {
             con = db.getCon();
             con.setAutoCommit(false);
             
-            String rawString = "INSERT INTO user (user_name,pass,telephone,email) VALUES(?, password(?), ?,?)";
+            String rawString = "INSERT INTO user (user_name,pass,telephone,email) VALUES( ? , password( ? ), ? , ? )";
             PreparedStatement statement = con.prepareStatement(rawString);
             statement.setString(1,user_name);
             statement.setString(2,pass);
@@ -129,7 +129,7 @@ public class User {
                 role_id = (String) rs2.getString("role_id");
             }
 
-            String rawString3 = "INSERT INTO user_role (user_id,role_id) VALUES (?,?)";
+            String rawString3 = "INSERT INTO user_role (user_id,role_id) VALUES ( ? , ? )";
             PreparedStatement statement3 = con.prepareStatement(rawString3);
             statement3.setString(1,user_id);
             statement3.setString(2,role_id);
