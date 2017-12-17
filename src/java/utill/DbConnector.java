@@ -22,7 +22,10 @@ public class DbConnector {
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
+
+
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbsGradeOneSchoolIntake","root","");
+
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DbConnector.class.getName()).log(Level.SEVERE, null, ex);
             
