@@ -1,4 +1,4 @@
-<%@page import="javax.websocket.Session"%>
+<%@page import="java.util.List"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.lang.String"%>
 <%@page import="java.util.ArrayList"%>
@@ -80,35 +80,23 @@
         <div class="w3-content" style="max-width:2000px;margin-top:46px">
             <div class ="login">
                 <form method ="post" action="putMarks">
-                    <Text>Interviewer : <% out.println(session.getAttribute("uname")); %></Text>
-                    <br>
-                    <Text>School : <% out.println(session.getAttribute("school")); %></Text>
-                    <br>
-                    <Text>Input marks for Applicant :<% out.println(session.getAttribute("applicant")); %></Text>
-                    <br>
-                    <Text> School id : <% out.println(session.getAttribute("school_id")); %></Text>
-                    <br>
-                    <text>View Reference student's details</text>
-                    <br><br>
+                    <%List refDetails = (List) session.getAttribute("refDetails");
+                        String[] detailHead;
+                        detailHead = new String[]{"First Name :","Last Name :", "Grade 5 :", "OL :", "AL :", "Other :"};
+                        int i = 0;
+                        for (Object ref : refDetails) {
+                            for (Object detail : (List) ref) {
+                                out.println(detailHead[i]);
+                                out.println(detail);
+                                %><br><%
+                                i++;
+                                if (i > 5) {
+                                    i = 0;
+                                    %><br><br><%
+                                }
+                            }
 
-
-                    <button type="button" class="btn btn-primary btn-block btn-large" value="view" onclick ="window.open('StudentDetailView')"> View Referees</button>
-
-
-
-                    <br>
-                    Questionare marks :<br>
-                    <input type="text" value ="0" name="mark1">
-                    <br>
-                    Other Marks :<br>
-                    <input type="text" value="0" name="mark2">
-                    <br>
-                    Marks for distance:
-                    <%Object dist_mark = session.getAttribute("dist_mark");%>
-                    <br>
-                    <input type="text" name="txtDistance" value="<%out.println(dist_mark);%>" disabled="disabled" />
-                    <br><br>
-                    <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>  
+                        }%>
                 </form>     
             </div>
 
