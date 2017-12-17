@@ -88,10 +88,11 @@
                             for (Object detail : (List) ref) {
                                 out.println(detailHead[i]);
                                 out.println(detail);
-                                %><br><br><%
+                                %><br><%
                                 i++;
                                 if (i > 5) {
                                     i = 0;
+                                    %><br><br><%
                                 }
                             }
 

@@ -87,12 +87,15 @@ public class User {
         return success;
     }
 
-    public boolean registerUser(String user_name, String occupation, String tel, String pass, String email) throws IOException {
+    public boolean registerUser(String user_name, String occupation, String tel, String pass, String email) throws IOException, SQLException {
 
         boolean success = false;
+        DbConnector db;
+        Connection con = null;
         try {
-            DbConnector db = new DbConnector();
-            Connection con = db.getCon();
+            db = new DbConnector();
+            con = db.getCon();
+            con.setAutoCommit(false);
             
             String rawString = "INSERT INTO user (user_name,pass,telephone,email) VALUES(?, password(?), ?,?)";
             PreparedStatement statement = con.prepareStatement(rawString);
@@ -131,12 +134,20 @@ public class User {
             statement3.setString(1,user_id);
             statement3.setString(2,role_id);
             statement3.executeUpdate();
-            
+            con.commit();
             success = true;
 
         } catch (SQLException ex) {
-
+            if (con != null) {
+                con.rollback();
+            }
+        }finally{
+            if (con != null) {
+                con.setAutoCommit(true);
+            }
         }
+
+        
 
         return success;
     }
@@ -169,7 +180,7 @@ public class User {
             DbConnector db = new DbConnector();
             Connection con = db.getCon();
             
-            String rawString = "select password(?) as pass";
+            String rawString = "select password( ? ) as pass";
             PreparedStatement statement = con.prepareStatement(rawString);
             statement.setString(1,password);
             rs = statement.executeQuery();
